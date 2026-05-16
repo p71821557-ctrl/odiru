@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Odiru Login</title>
+  <title>ODIRU LOGIN</title>
 
-  <link rel="stylesheet" href="./css/style.css">
+  <link
+    rel="stylesheet"
+    href="./css/style.css"
+  >
+
 </head>
 
 <body>
 
-  <!-- 배경 -->
   <div class="background-overlay"></div>
 
   <div class="container">
@@ -23,12 +29,14 @@
     <div class="left-panel">
 
       <div class="logo-box">
+
         <h1>ODIRU</h1>
 
         <p>
           당신만의 여행을<br>
           더 특별하게.
         </p>
+
       </div>
 
     </div>
@@ -36,12 +44,20 @@
     <!-- 오른쪽 -->
     <div class="right-panel">
 
+      <button
+        class="back-btn"
+        onclick="history.back()"
+      >
+        ← 뒤로가기
+      </button>
+
       <div class="auth-box">
 
-        <h2>로그인</h2>
+        <h2>카카오 로그인</h2>
 
         <p class="sub-text">
-          카카오 계정으로 간편하게 로그인하세요
+          카카오 계정으로<br>
+          간편하게 시작하세요
         </p>
 
         <button
@@ -54,38 +70,6 @@
 
           카카오로 시작하기
         </button>
-
-        <div class="divider">
-          <span>OR</span>
-        </div>
-
-        <form class="auth-form">
-
-          <input
-            type="email"
-            placeholder="이메일"
-          >
-
-          <input
-            type="password"
-            placeholder="비밀번호"
-          >
-
-          <button
-            type="submit"
-            class="main-btn"
-          >
-            로그인
-          </button>
-
-        </form>
-
-        <p class="move-page">
-          계정이 없으신가요?
-          <a href="./signup.html">
-            회원가입
-          </a>
-        </p>
 
       </div>
 

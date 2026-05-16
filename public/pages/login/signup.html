@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -10,7 +12,11 @@
 
   <title>회원가입</title>
 
-  <link rel="stylesheet" href="./css/style.css">
+  <link
+    rel="stylesheet"
+    href="./css/style.css"
+  >
+
 </head>
 
 <body>
@@ -36,63 +42,32 @@
 
     <div class="right-panel">
 
+      <button
+        class="back-btn"
+        onclick="history.back()"
+      >
+        ← 뒤로가기
+      </button>
+
       <div class="auth-box">
 
-        <h2>회원가입</h2>
+        <h2>카카오 회원가입</h2>
 
         <p class="sub-text">
-          ODIRU와 함께 여행을 시작하세요
+          카카오 계정 하나로<br>
+          바로 가입할 수 있어요
         </p>
 
         <button
           class="kakao-btn"
           onclick="location.href='/auth/kakao'"
         >
-
           <img
             src="https://cdn-icons-png.flaticon.com/512/4494/4494622.png"
           >
 
           카카오로 회원가입
-
         </button>
-
-        <div class="divider">
-          <span>OR</span>
-        </div>
-
-        <form class="auth-form">
-
-          <input
-            type="text"
-            placeholder="이름"
-          >
-
-          <input
-            type="email"
-            placeholder="이메일"
-          >
-
-          <input
-            type="password"
-            placeholder="비밀번호"
-          >
-
-          <button
-            type="submit"
-            class="main-btn"
-          >
-            회원가입
-          </button>
-
-        </form>
-
-        <p class="move-page">
-          이미 계정이 있으신가요?
-          <a href="./login.html">
-            로그인
-          </a>
-        </p>
 
       </div>
 
