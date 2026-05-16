@@ -7,45 +7,169 @@
 }
 
 body {
-  background: #f5f7fb;
   font-family: Pretendard, sans-serif;
-  color: #222;
+  overflow: hidden;
+  background: #0f172a;
 }
 
-/* LOGIN */
+/* 배경 */
+
+.background-overlay {
+  position: fixed;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #1e3a8a,
+      #2563eb
+    );
+
+  z-index: -1;
+}
+
+/* 전체 */
 
 .container {
   width: 100%;
   min-height: 100vh;
 
   display: flex;
+}
+
+/* 왼쪽 */
+
+.left-panel {
+  flex: 1;
+
+  display: flex;
   justify-content: center;
   align-items: center;
 
-  padding: 40px;
+  padding: 80px;
+
+  color: white;
+}
+
+.logo-box h1 {
+  font-size: 90px;
+  font-weight: 900;
+
+  margin-bottom: 25px;
+
+  letter-spacing: 8px;
+}
+
+.logo-box p {
+  font-size: 28px;
+  line-height: 1.6;
+
+  opacity: 0.9;
+}
+
+/* 오른쪽 */
+
+.right-panel {
+  width: 560px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 50px;
 }
 
 .auth-box {
   width: 100%;
-  max-width: 480px;
 
-  background: white;
+  background: rgba(255,255,255,0.12);
 
-  border-radius: 32px;
+  backdrop-filter: blur(18px);
+
+  border:
+    1px solid rgba(255,255,255,0.15);
+
+  border-radius: 36px;
 
   padding: 50px;
 
   box-shadow:
-    0 15px 40px rgba(0,0,0,0.12);
+    0 20px 60px rgba(0,0,0,0.25);
+
+  color: white;
 }
 
-.auth-box h1 {
-  text-align: center;
-
+.auth-box h2 {
   font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.sub-text {
+  color: rgba(255,255,255,0.7);
 
   margin-bottom: 35px;
 }
+
+/* 카카오 */
+
+.kakao-btn {
+  width: 100%;
+  height: 62px;
+
+  border: none;
+  border-radius: 18px;
+
+  background: #fee500;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.kakao-btn img {
+  width: 28px;
+}
+
+.kakao-btn:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 25px rgba(254,229,0,0.3);
+}
+
+/* 구분선 */
+
+.divider {
+  margin: 35px 0;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  color: rgba(255,255,255,0.5);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+
+  flex: 1;
+  height: 1px;
+
+  background:
+    rgba(255,255,255,0.2);
+}
+
+/* 폼 */
 
 .auth-form {
   display: flex;
@@ -58,24 +182,32 @@ body {
   width: 100%;
   height: 58px;
 
-  border: 1px solid #ddd;
+  border: none;
   border-radius: 16px;
 
-  padding: 0 18px;
+  background:
+    rgba(255,255,255,0.12);
+
+  color: white;
+
+  padding: 0 20px;
 
   font-size: 16px;
+}
 
-  transition: 0.3s;
+.auth-form input::placeholder {
+  color:
+    rgba(255,255,255,0.5);
 }
 
 .auth-form input:focus {
   outline: none;
 
-  border-color: #2979ff;
-
-  box-shadow:
-    0 0 0 4px rgba(41,121,255,0.12);
+  border:
+    1px solid rgba(255,255,255,0.4);
 }
+
+/* 메인 버튼 */
 
 .main-btn {
   width: 100%;
@@ -84,9 +216,63 @@ body {
   border: none;
   border-radius: 18px;
 
-  background: #2979ff;
+  background: white;
 
-  color: white;
+  color: #111;
 
   font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.main-btn:hover {
+  transform: translateY(-3px);
+}
+
+/* 하단 */
+
+.move-page {
+  margin-top: 30px;
+
+  text-align: center;
+
+  color:
+    rgba(255,255,255,0.7);
+}
+
+.move-page a {
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: bold;
+}
+
+/* 반응형 */
+
+@media(max-width:1024px) {
+
+  .left-panel {
+    display: none;
+  }
+
+  .right-panel {
+    width: 100%;
+  }
+
+}
+
+@media(max-width:768px) {
+
+  .auth-box {
+    padding: 35px 25px;
+  }
+
+  .auth-box h2 {
+    font-size: 34px;
+  }
+
 }

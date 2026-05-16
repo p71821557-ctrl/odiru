@@ -2,81 +2,105 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>회원가입</title>
 
   <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
+
+  <div class="background-overlay"></div>
 
   <div class="container">
 
-    <div class="auth-box">
+    <div class="left-panel">
 
-      <h1>회원가입</h1>
+      <div class="logo-box">
 
-      <form class="auth-form">
+        <h1>ODIRU</h1>
 
-        <input
-          type="text"
-          placeholder="이름"
-          required
-        >
+        <p>
+          새로운 여행을<br>
+          시작해보세요.
+        </p>
 
-        <input
-          type="email"
-          placeholder="이메일"
-          required
-        >
-
-        <input
-          type="password"
-          placeholder="비밀번호"
-          required
-        >
-
-        <button
-          type="submit"
-          class="main-btn"
-        >
-          회원가입
-        </button>
-
-      </form>
-
-      <div class="divider">
-        <span>또는</span>
       </div>
 
-      <div class="social-login">
+    </div>
+
+    <div class="right-panel">
+
+      <div class="auth-box">
+
+        <h2>회원가입</h2>
+
+        <p class="sub-text">
+          ODIRU와 함께 여행을 시작하세요
+        </p>
 
         <button
-          type="button"
-          class="google-btn"
-        >
-          Google 회원가입
-        </button>
-
-        <button
-          type="button"
           class="kakao-btn"
+          onclick="location.href='/auth/kakao'"
         >
-          Kakao 회원가입
+
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4494/4494622.png"
+          >
+
+          카카오로 회원가입
+
         </button>
 
-      </div>
+        <div class="divider">
+          <span>OR</span>
+        </div>
 
-      <p class="move-page">
-        이미 계정이 있으신가요?
-        <a href="./login.html">
-          로그인
-        </a>
-      </p>
+        <form class="auth-form">
+
+          <input
+            type="text"
+            placeholder="이름"
+          >
+
+          <input
+            type="email"
+            placeholder="이메일"
+          >
+
+          <input
+            type="password"
+            placeholder="비밀번호"
+          >
+
+          <button
+            type="submit"
+            class="main-btn"
+          >
+            회원가입
+          </button>
+
+        </form>
+
+        <p class="move-page">
+          이미 계정이 있으신가요?
+          <a href="./login.html">
+            로그인
+          </a>
+        </p>
+
+      </div>
 
     </div>
 
   </div>
 
   <script src="./js/script.js"></script>
+
 </body>
 </html>
