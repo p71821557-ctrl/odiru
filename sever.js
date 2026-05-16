@@ -1,24 +1,18 @@
 const express = require("express");
-
 const path = require("path");
 
 const app = express();
+const PORT = 3000;
 
-app.use(express.static(__dirname));
+// public 폴더 연결
+app.use(express.static(path.join(__dirname, "public")));
 
+// 기본 페이지
 app.get("/", (req, res) => {
-
-  res.sendFile(
-    path.join(__dirname, "index.html")
-  );
-
+  res.redirect("/pages/login/login.html");
 });
 
-const PORT =
-process.env.PORT || 3000;
-
-app.listen(PORT, "0.0.0.0", () => {
-
+// 서버 실행
+app.listen(PORT, () => {
   console.log(`서버 실행 완료 : ${PORT}`);
-
 });

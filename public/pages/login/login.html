@@ -1,53 +1,76 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인</title>
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>어디루 로그인</title>
-
-  <link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="./css/style.css">
 </head>
-
 <body>
 
-  <section class="login-page">
+  <div class="container">
 
-    <div class="login-container">
+    <div class="auth-box">
 
-      <h1>어디루 로그인</h1>
+      <h1>로그인</h1>
 
-      <input
-        type="email"
-        id="login-email"
-        placeholder="이메일 입력"
-      >
+      <form class="auth-form">
 
-      <input
-        type="password"
-        id="login-password"
-        placeholder="비밀번호 입력"
-      >
+        <input
+          type="email"
+          placeholder="이메일"
+          required
+        >
 
-      <button id="login-submit">
-        로그인
-      </button>
+        <input
+          type="password"
+          placeholder="비밀번호"
+          required
+        >
 
-      <button id="back-home">
-        홈으로 돌아가기
-      </button>
+        <button
+          type="submit"
+          class="main-btn"
+        >
+          로그인
+        </button>
+
+      </form>
+
+      <div class="divider">
+        <span>또는</span>
+      </div>
+
+      <div class="social-login">
+
+        <button
+          type="button"
+          class="google-btn"
+        >
+          Google 로그인
+        </button>
+
+        <button
+          type="button"
+          class="kakao-btn"
+        >
+          Kakao 로그인
+        </button>
+
+      </div>
+
+      <p class="move-page">
+        계정이 없으신가요?
+        <a href="./signup.html">
+          회원가입
+        </a>
+      </p>
 
     </div>
 
-  </section>
+  </div>
 
-  <script src="script.js"></script>
-
+  <script src="./js/script.js"></script>
 </body>
-
 </html>
