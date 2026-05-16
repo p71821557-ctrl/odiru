@@ -6,10 +6,10 @@ const path = require("path");
 
 const app = express();
 
-// public 폴더 연결
+// public 연결
 app.use(express.static(path.join(__dirname, "public")));
 
-// 세션 설정
+// 세션
 app.use(
   session({
     secret: "odiru-secret",
@@ -38,7 +38,7 @@ passport.use(
       clientID: "05d30bdbb381878c14e4d47a15d86d8f",
 
       callbackURL:
-        "http://127.0.0.1:3000/auth/kakao/callback",
+        "http://localhost:3000/auth/kakao/callback",
     },
 
     (accessToken, refreshToken, profile, done) => {
@@ -51,104 +51,43 @@ passport.use(
   )
 );
 
-// 카카오 로그인 시작
+// 로그인 시작
 app.get(
   "/auth/kakao",
   passport.authenticate("kakao")
 );
 
-// 로그인 성공
+// 로그인 완료
 app.get(
   "/auth/kakao/callback",
 
   passport.authenticate("kakao", {
-    failureRedirect:
-      "/pages/login/login.html",
+    failureRedirect: "/",
   }),
 
   (req, res) => {
 
     res.send(`
       <div style="
-        width:100%;
-        height:100vh;
-
-        display:flex;
-        justify-content:center;
-        align-items:center;
-
-        background:#f5f7fb;
-
         font-family:sans-serif;
+        text-align:center;
+        margin-top:80px;
       ">
 
-        <div style="
-          width:420px;
+        <h1>카카오 로그인 성공 🎉</h1>
 
-          background:white;
+        <img
+          src="${req.user._json.properties.profile_image}"
+          width="120"
+          style="
+            border-radius:50%;
+            margin-top:20px;
+          "
+        >
 
-          padding:50px;
-
-          border-radius:30px;
-
-          text-align:center;
-
-          box-shadow:
-          0 15px 40px rgba(0,0,0,0.12);
-        ">
-
-          <img
-            src="${req.user._json.properties.profile_image}"
-
-            style="
-              width:120px;
-              height:120px;
-
-              border-radius:50%;
-
-              margin-bottom:25px;
-            "
-          >
-
-          <h1>
-            ${req.user.username}님
-          </h1>
-
-          <p style="
-            margin-top:15px;
-            color:#666;
-          ">
-            카카오 로그인 성공 🎉
-          </p>
-
-          <button
-            onclick="
-              location.href='/'
-            "
-
-            style="
-              width:100%;
-              height:58px;
-
-              margin-top:35px;
-
-              border:none;
-              border-radius:18px;
-
-              background:#2979ff;
-
-              color:white;
-
-              font-size:18px;
-              font-weight:bold;
-
-              cursor:pointer;
-            "
-          >
-            홈으로 이동
-          </button>
-
-        </div>
+        <h2 style="margin-top:20px;">
+          ${req.user.username}
+        </h2>
 
       </div>
     `);
