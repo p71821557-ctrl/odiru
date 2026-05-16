@@ -1,0 +1,532 @@
+/* RESET */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f5f7fb;
+  font-family: Pretendard, sans-serif;
+  color: #222;
+}
+
+
+
+/* HEADER */
+
+.header {
+  width: 100%;
+  height: 80px;
+
+  background: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 60px;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 1000;
+
+  box-shadow:
+    0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.logo-area img {
+  height: 70px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo-area img:hover {
+  transform: scale(1.08);
+}
+
+.logo-area img:active {
+  transform: scale(0.96);
+}
+
+
+
+/* NAV */
+
+.nav {
+  display: flex;
+  gap: 35px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.nav a:hover {
+  color: #2979ff;
+}
+
+
+
+/* HEADER BUTTON */
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.header-buttons button {
+  height: 42px;
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 12px;
+
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+
+/* HERO */
+
+.hero-section {
+  width: 100%;
+  height: 720px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+/* HERO SLIDE */
+
+.hero-slider {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+
+  opacity: 0;
+
+  transition: 1s;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+/* OVERLAY */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    rgba(0, 0, 0, 0.45);
+
+  z-index: 1;
+}
+
+
+
+/* HERO CONTENT */
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+
+  color: white;
+
+  padding-top: 220px;
+  padding-left: 100px;
+}
+
+.hero-content h1 {
+  font-size: 72px;
+  margin-bottom: 25px;
+}
+
+.hero-content p {
+  font-size: 24px;
+  line-height: 1.6;
+}
+
+
+
+/* HERO BUTTON */
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+
+  margin-top: 35px;
+}
+
+.hero-buttons button {
+  width: 160px;
+  height: 58px;
+
+  border: none;
+  border-radius: 16px;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+
+/* SEARCH */
+
+.search-section {
+  margin-top: -90px;
+
+  position: relative;
+
+  z-index: 20;
+}
+
+.search-card {
+  width: 90%;
+  max-width: 1400px;
+
+  margin: auto;
+
+  background: white;
+
+  border-radius: 40px;
+
+  padding: 50px;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+
+
+/* SEARCH GRID */
+
+.search-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 25px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.input-box label {
+  font-weight: bold;
+}
+
+.input-box input,
+.input-box select {
+  height: 58px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 14px;
+
+  padding: 0 18px;
+}
+
+
+
+/* SEARCH BUTTON */
+
+.search-btn {
+  width: 100%;
+  height: 62px;
+
+  margin-top: 35px;
+
+  border: none;
+  border-radius: 16px;
+
+  background: #2979ff;
+
+  color: white;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+
+
+/* COMMON */
+
+section {
+  width: 90%;
+
+  margin: 120px auto;
+}
+
+.section-title {
+  margin-bottom: 40px;
+}
+
+.section-title h2 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.section-title p {
+  color: #666;
+}
+
+
+
+/* MAP */
+
+.planner-container {
+  display: flex;
+  gap: 30px;
+}
+
+
+
+/* GOOGLE MAP */
+
+.google-map-container {
+  flex: 4;
+
+  min-height: 750px;
+
+  border-radius: 32px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.google-map-container iframe {
+  width: 100%;
+  min-height: 750px;
+
+  border: none;
+}
+
+
+
+/* PANEL */
+
+.planner-panel {
+  flex: 1;
+
+  background: white;
+
+  border-radius: 30px;
+
+  padding: 35px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.planner-panel h3 {
+  font-size: 30px;
+  margin-bottom: 28px;
+}
+
+
+
+/* INPUT */
+
+.planner-input {
+  margin-bottom: 24px;
+}
+
+.planner-input label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-weight: 700;
+}
+
+.planner-input input {
+  width: 100%;
+  height: 55px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background: #f1f5f9;
+
+  padding: 0 18px;
+}
+
+
+
+/* ROUTE BUTTON */
+
+#route-btn {
+  width: 100%;
+  height: 58px;
+
+  border: none;
+  border-radius: 18px;
+
+  background: #2979ff;
+
+  color: white;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+/* 플래너 게임 */
+
+.planner-games {
+  margin-top: 25px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.planner-game-card {
+  width: 100%;
+
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  text-decoration: none;
+  color: #222;
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.08);
+
+  transition: 0.3s;
+}
+
+.planner-game-card:hover {
+  transform: translateY(-4px);
+
+  background: #f8fbff;
+}
+
+.planner-game-icon {
+  width: 58px;
+  height: 58px;
+
+  border-radius: 16px;
+
+  background: #2979ff;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 28px;
+
+  flex-shrink: 0;
+}
+
+.planner-game-card h4 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.planner-game-card p {
+  font-size: 14px;
+  color: #666;
+}
+
+
+
+/* FOOTER */
+
+footer {
+  width: 100%;
+  height: 110px;
+
+  background: #111;
+
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* RESPONSIVE */
+
+@media(max-width:1024px) {
+
+  .search-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .planner-container {
+    flex-direction: column;
+  }
+
+  .game-container {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+
+@media(max-width:768px) {
+
+  .search-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content {
+    padding-left: 30px;
+  }
+
+  .hero-content h1 {
+    font-size: 48px;
+  }
+
+}

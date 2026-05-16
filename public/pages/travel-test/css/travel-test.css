@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Pretendard',sans-serif;
+
+  background:
+  linear-gradient(135deg,#edf4ff,#f7f9ff);
+
+  min-height:100vh;
+}
+
+.test-page{
+  width:100%;
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:40px;
+}
+
+.test-container{
+  width:100%;
+  max-width:1200px;
+
+  background:white;
+
+  padding:70px;
+
+  border-radius:40px;
+
+  box-shadow:
+  0 10px 40px rgba(0,0,0,0.08);
+
+  text-align:center;
+}
+
+.top-badge{
+  display:inline-block;
+
+  padding:12px 24px;
+
+  border-radius:999px;
+
+  background:#0b57d0;
+
+  color:white;
+
+  font-weight:700;
+
+  margin-bottom:30px;
+}
+
+h1{
+  font-size:58px;
+
+  margin-bottom:20px;
+}
+
+.sub-title{
+  font-size:20px;
+  color:#666;
+
+  margin-bottom:50px;
+}
+
+.progress-area{
+  margin-bottom:60px;
+}
+
+.progress-info{
+  display:flex;
+  justify-content:space-between;
+
+  margin-bottom:12px;
+
+  font-weight:700;
+}
+
+.progress-wrap{
+  width:100%;
+  height:16px;
+
+  background:#e7edf9;
+
+  border-radius:999px;
+
+  overflow:hidden;
+}
+
+.progress-bar{
+  width:10%;
+  height:100%;
+
+  background:
+  linear-gradient(90deg,#0b57d0,#7c9cff);
+
+  transition:0.4s;
+}
+
+#question{
+  font-size:42px;
+
+  margin-bottom:60px;
+}
+
+.card-wrapper{
+  display:flex;
+  gap:30px;
+}
+
+.choice-card{
+  flex:1;
+
+  min-height:320px;
+
+  border-radius:35px;
+
+  color:white;
+
+  cursor:pointer;
+
+  transition:0.35s;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:30px;
+}
+
+.left-card{
+  background:
+  linear-gradient(135deg,#0b57d0,#6ea2ff);
+}
+
+.right-card{
+  background:
+  linear-gradient(135deg,#ff4b91,#ff8fb6);
+}
+
+.choice-card:hover{
+  transform:
+  translateY(-10px)
+  scale(1.03);
+}
+
+.choice-emoji{
+  font-size:70px;
+
+  margin-bottom:25px;
+}
+
+.choice-card h3{
+  font-size:42px;
+
+  margin-bottom:20px;
+}
+
+.choice-desc{
+  font-size:18px;
+
+  line-height:1.6;
+}
+
+.choice-tag{
+
+  margin-top:25px;
+
+  display:inline-block;
+
+  padding:10px 20px;
+
+  border-radius:999px;
+
+  background:white;
+
+  color:#111;
+
+  font-size:14px;
+  font-weight:700;
+
+}
+
+.result-card{
+  padding:50px;
+}
+
+.result-title{
+  font-size:54px;
+
+  margin:30px 0 20px;
+}
+
+.mbti-code{
+  font-size:30px;
+  font-weight:800;
+
+  color:#0b57d0;
+
+  margin-bottom:30px;
+}
+
+.result-desc{
+  font-size:22px;
+
+  line-height:1.8;
+
+  color:#555;
+
+  margin-bottom:40px;
+}
+
+.travel-list{
+  display:flex;
+  gap:20px;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+
+  margin-top:30px;
+}
+
+.travel-item{
+  padding:15px 25px;
+
+  border-radius:16px;
+
+  background:#f4f7ff;
+
+  color:#0b57d0;
+
+  font-weight:700;
+}
+
+.result-detail{
+  margin-top:50px;
+
+  background:#f8faff;
+
+  padding:35px;
+
+  border-radius:25px;
+}
+
+.result-buttons{
+  margin-top:50px;
+
+  display:flex;
+  gap:20px;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+}
+
+#retry-btn,
+#main-btn,
+#back-main-btn{
+
+  width:220px;
+  height:60px;
+
+  border:none;
+  border-radius:18px;
+
+  font-size:18px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+#retry-btn{
+  background:#0b57d0;
+  color:white;
+}
+
+#main-btn{
+  background:#111;
+  color:white;
+}
+
+#back-main-btn{
+
+  position:fixed;
+
+  top:30px;
+  left:30px;
+
+  background:#111;
+  color:white;
+}
+
+#retry-btn:hover,
+#main-btn:hover,
+#back-main-btn:hover{
+
+  transform:translateY(-5px);
+
+}
+
+@media(max-width:900px){
+
+  .card-wrapper{
+    flex-direction:column;
+  }
+
+  h1{
+    font-size:42px;
+  }
+
+  #question{
+    font-size:30px;
+  }
+
+}

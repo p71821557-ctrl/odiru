@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>
+    행운볼 여행 추천
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet"
+        href="/pages/lucky-ball/css/lucky-ball.css">
+
+</head>
+
+<body>
+
+  <!-- 뒤로가기 버튼 -->
+
+  <button id="back-btn">
+    ← 메인으로
+  </button>
+
+  <section class="ball-page">
+
+    <div class="ball-container">
+
+      <h1>
+        🎁 행운볼 여행 추천
+      </h1>
+
+      <p>
+        랜덤으로 당신의 여행지를 뽑아보세요
+      </p>
+
+      <div class="rotate-ring"></div>
+
+      <div class="ball"
+           id="lucky-ball">
+
+        ✈️
+
+      </div>
+
+      <h2 id="country-name">
+        START
+      </h2>
+
+      <div id="result-card"
+           class="result-card hidden">
+
+        <h3>
+          🎉 오늘의 추천 여행지
+        </h3>
+
+        <p id="result-country">
+          일본
+        </p>
+
+        <span>
+          여기 어떠신가요?
+        </span>
+
+      </div>
+
+      <button id="draw-btn">
+        행운볼 뽑기
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- DATA -->
+  <script src="/pages/lucky-ball/data/countries.js"></script>
+
+  <!-- JS -->
+  <script src="/pages/lucky-ball/js/lucky-ball.js"></script>
+
+</body>
+
+</html>

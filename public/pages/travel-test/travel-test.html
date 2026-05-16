@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>
+    여행 MBTI 테스트
+  </title>
+
+  <!-- CSS -->
+  <link
+    rel="stylesheet"
+    href="/pages/travel-test/css/travel-test.css"
+  />
+
+  <!-- FONT -->
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  />
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+</head>
+
+<body>
+
+  <button id="back-main-btn">
+    ← 메인으로 돌아가기
+  </button>
+
+  <section class="test-page">
+
+    <div class="test-container">
+
+      <div class="top-badge">
+        ✈ 여행 MBTI 테스트
+      </div>
+
+      <h1>
+        당신의 여행 성향은?
+      </h1>
+
+      <p class="sub-title">
+        질문을 선택하고 나만의 여행 스타일을 알아보세요
+      </p>
+
+      <!-- 진행률 -->
+
+      <div class="progress-area">
+
+        <div class="progress-info">
+
+          <span id="question-number">
+            Q1
+          </span>
+
+          <span id="progress-text">
+            10%
+          </span>
+
+        </div>
+
+        <div class="progress-wrap">
+
+          <div
+            class="progress-bar"
+            id="progress-bar"
+          ></div>
+
+        </div>
+
+      </div>
+
+      <!-- 질문 -->
+
+      <h2 id="question">
+        여행에서 더 중요한 것은?
+      </h2>
+
+      <!-- 선택 카드 -->
+
+      <div class="card-wrapper">
+
+        <!-- LEFT -->
+
+        <div
+          class="choice-card left-card"
+          id="left-btn"
+        >
+
+          <div class="choice-inner">
+
+            <div
+              class="choice-emoji"
+              id="left-emoji"
+            >
+              ✨
+            </div>
+
+            <h3 id="left-text">
+              감성
+            </h3>
+
+            <p
+              class="choice-desc"
+              id="left-desc"
+            >
+              분위기와 감성을 중요하게 생각해요
+            </p>
+
+            <div class="choice-tag">
+              감성 스타일
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div
+          class="choice-card right-card"
+          id="right-btn"
+        >
+
+          <div class="choice-inner">
+
+            <div
+              class="choice-emoji"
+              id="right-emoji"
+            >
+              🔥
+            </div>
+
+            <h3 id="right-text">
+              액티비티
+            </h3>
+
+            <p
+              class="choice-desc"
+              id="right-desc"
+            >
+              활동적인 여행을 좋아해요
+            </p>
+
+            <div class="choice-tag">
+              액티브 스타일
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- JS -->
+  <script src="/pages/travel-test/js/travel-test.js"></script>
+
+</body>
+
+</html>

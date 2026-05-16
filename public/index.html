@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    어디루 - 국내여행 플랫폼
+  </title>
+
+  <link rel="stylesheet"
+        href="/css/style.css" />
+
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+    <div class="logo-area">
+
+      <a href="/">
+
+        <img
+          src="/images/odiru.png"
+          alt="어디루 로고"
+        />
+
+      </a>
+
+    </div>
+
+    <nav class="nav">
+
+      <a href="/pages/domestic-travel/domestic-travel.html">
+        국내여행
+      </a>
+
+      <a href="#">
+        숙소예약
+      </a>
+
+      <a href="#">
+        여행코스
+      </a>
+
+    </nav>
+
+    <div class="header-buttons">
+
+      <button id="mypage-btn">
+        마이페이지
+      </button>
+
+      <button id="login-btn">
+        로그인
+      </button>
+
+      <button id="signup-btn">
+        회원가입
+      </button>
+
+      <button id="logout-btn"
+              style="display:none;">
+        로그아웃
+      </button>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- HERO -->
+
+  <section class="hero-section">
+
+    <div class="hero-slider">
+
+      <div class="slide active">
+
+        <img
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920"
+        />
+
+      </div>
+
+      <div class="slide">
+
+        <img
+          src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1920"
+        />
+
+      </div>
+
+      <div class="slide">
+
+        <img
+          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920"
+        />
+
+      </div>
+
+    </div>
+
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+
+      <h1 id="hero-title">
+        국내 어디든 떠나보세요
+      </h1>
+
+      <p>
+        쉽고 빠르게 국내여행을 계획하고<br />
+        감성 여행지를 탐험해보세요.
+      </p>
+
+      <div class="hero-buttons">
+
+        <button id="hero-login-btn">
+          로그인
+        </button>
+
+        <button id="hero-signup-btn">
+          회원가입
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- SEARCH -->
+
+  <section class="search-section">
+
+    <div class="search-card">
+
+      <div class="search-grid">
+
+        <div class="input-box">
+
+          <label>
+            도착지역
+          </label>
+
+          <input
+            type="text"
+            placeholder="예: 부산"
+          />
+
+        </div>
+
+        <div class="input-box">
+
+          <label>
+            출발일
+          </label>
+
+          <input type="date" />
+
+        </div>
+
+        <div class="input-box">
+
+          <label>
+            도착일
+          </label>
+
+          <input type="date" />
+
+        </div>
+
+        <div class="input-box">
+
+          <label>
+            인원
+          </label>
+
+          <select>
+
+            <option>
+              성인 1명
+            </option>
+
+            <option>
+              성인 2명
+            </option>
+
+            <option>
+              가족 여행
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="input-box">
+
+          <label>
+            호텔 숙박
+          </label>
+
+          <select>
+
+            <option>
+              숙박 안함
+            </option>
+
+            <option>
+              1박
+            </option>
+
+            <option>
+              2박
+            </option>
+
+            <option>
+              3박 이상
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <button class="search-btn">
+        여행 일정 검색
+      </button>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- MAP -->
+
+  <section class="map-section">
+
+    <div class="section-title">
+
+      <h2>
+        여행 플래너
+      </h2>
+
+      <p>
+        출발지와 도착지를 기반으로
+        여행 동선을 확인하세요.
+      </p>
+
+    </div>
+
+    <div class="planner-container">
+
+      <div class="google-map-container">
+
+        <iframe
+          id="google-map"
+          src="https://maps.google.com/maps?q=서울&t=&z=7&ie=UTF8&iwloc=&output=embed"
+          loading="lazy">
+        </iframe>
+
+      </div>
+
+      <div class="planner-panel">
+
+        <h3>
+          여행 경로 설정
+        </h3>
+
+        <div class="planner-input">
+
+          <label>
+            출발지
+          </label>
+
+          <input
+            type="text"
+            id="start-place"
+            placeholder="예: 서울역"
+          />
+
+        </div>
+
+        <div class="planner-input">
+
+          <label>
+            도착지
+          </label>
+
+          <input
+            type="text"
+            id="end-place"
+            placeholder="예: 부산 해운대"
+          />
+
+        </div>
+
+        <button id="route-btn">
+          여행 경로 확인
+        </button>
+
+        <div class="planner-games">
+
+          <a
+            href="/pages/lucky-ball/lucky-ball.html"
+            class="planner-game-card"
+          >
+
+            <div class="planner-game-icon">
+              🎱
+            </div>
+
+            <div>
+
+              <h4>
+                행운볼 뽑기
+              </h4>
+
+              <p>
+                랜덤 여행지 추천
+              </p>
+
+            </div>
+
+          </a>
+
+          <a
+            href="/pages/travel-test/travel-test.html"
+            class="planner-game-card"
+          >
+
+            <div class="planner-game-icon">
+              ✈️
+            </div>
+
+            <div>
+
+              <h4>
+                여행 성향 테스트
+              </h4>
+
+              <p>
+                나와 맞는 여행 스타일
+              </p>
+
+            </div>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
+      © 2026 Odiro ALL RIGHTS RESERVED
+    </p>
+
+  </footer>
+
+  <script src="/js/script.js"></script>
+
+</body>
+
+</html>
