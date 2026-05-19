@@ -249,7 +249,7 @@ function showResult() {
     ESTP: {
       resultType: "모험가형 여행자",
       nickname: "익스트림 헌터",
-      recommend: ["제주도", "설악산", "지리산"],
+      recommend: ["단양", "인제", "태안"],
       resultDesc:
         "새로운 경험과 모험을 즐기는 자유로운 여행자입니다.",
       travelStyle:
@@ -260,7 +260,7 @@ function showResult() {
     ESFP: {
       resultType: "흥폭발 여행자",
       nickname: "축제의 중심점",
-      recommend: ["부산 광안리", "홍대", "이비자"],
+      recommend: ["부산", "강릉", "대천"],
       resultDesc:
         "사람들과 어울리며 분위기를 즐기는 여행자입니다.",
       travelStyle:
@@ -271,7 +271,7 @@ function showResult() {
     ENTP: {
       resultType: "호기심 탐험가",
       nickname: "호기심의 방랑자",
-      recommend: ["도쿄", "런던", "베를린"],
+      recommend: ["군산", "통영", "목포"],
       resultDesc:
         "새로운 문화와 경험을 끊임없이 탐험합니다.",
       travelStyle:
@@ -282,7 +282,7 @@ function showResult() {
     ENFP: {
       resultType: "감성 자유 여행자",
       nickname: "낭만 가득 몽상가",
-      recommend: ["제주도", "남해", "파리"],
+      recommend: ["제주도", "양양", "남해"],
       resultDesc:
         "감성과 낭만을 중요하게 생각하는 여행자입니다.",
       travelStyle:
@@ -293,7 +293,7 @@ function showResult() {
     ISTP: {
       resultType: "자연 모험가",
       nickname: "실전 탐험가",
-      recommend: ["속초", "평창", "무등산"],
+      recommend: ["속초", "무주", "가평"],
       resultDesc:
         "자연 속에서 활동적인 경험을 즐깁니다.",
       travelStyle:
@@ -304,7 +304,7 @@ function showResult() {
     ISFP: {
       resultType: "감성 예술 여행자",
       nickname: "예술적 유랑자",
-      recommend: ["전주", "교토", "피렌체"],
+      recommend: ["담양", "전주", "삼척"],
       resultDesc:
         "분위기와 감성을 천천히 즐기는 여행자입니다.",
       travelStyle:
@@ -315,7 +315,7 @@ function showResult() {
     INTP: {
       resultType: "지적 탐험가",
       nickname: "고독한 분석가",
-      recommend: ["경주", "아테네", "로마"],
+      recommend: ["경주", "공주", "부여"],
       resultDesc:
         "역사와 문화를 깊이 탐구하는 스타일입니다.",
       travelStyle:
@@ -326,7 +326,7 @@ function showResult() {
     INFP: {
       resultType: "치유 여행자",
       nickname: "꿈꾸는 은둔자",
-      recommend: ["남해", "홋카이도", "스위스"],
+      recommend: ["고성", "완도", "보성"],
       resultDesc:
         "조용하고 감성적인 공간에서 힐링을 추구합니다.",
       travelStyle:
@@ -337,7 +337,7 @@ function showResult() {
     ESTJ: {
       resultType: "완벽 계획 여행자",
       nickname: "여행 사령관",
-      recommend: ["서울", "싱가포르", "도쿄"],
+      recommend: ["서울", "대전", "대구"],
       resultDesc:
         "체계적이고 효율적인 여행을 선호합니다.",
       travelStyle:
@@ -348,7 +348,7 @@ function showResult() {
     ESFJ: {
       resultType: "따뜻한 동행 여행자",
       nickname: "친절한 동행자",
-      recommend: ["오사카", "부산", "다낭"],
+      recommend: ["춘천", "안면도", "거제"],
       resultDesc:
         "함께하는 사람들의 행복을 중요하게 생각합니다.",
       travelStyle:
@@ -359,7 +359,7 @@ function showResult() {
     ENTJ: {
       resultType: "도시 정복 여행자",
       nickname: "야망의 정복자",
-      recommend: ["뉴욕", "두바이", "강남"],
+      recommend: ["송도", "해운대", "판교"],
       resultDesc:
         "최고의 장소와 경험을 추구합니다.",
       travelStyle:
@@ -370,7 +370,7 @@ function showResult() {
     ENFJ: {
       resultType: "소통형 여행자",
       nickname: "에너지 전도사",
-      recommend: ["발리", "태국", "캄보디아"],
+      recommend: ["여수", "광안리", "포항"],
       resultDesc:
         "사람과의 교류를 가장 중요하게 생각합니다.",
       travelStyle:
@@ -381,7 +381,7 @@ function showResult() {
     ISTJ: {
       resultType: "정석 여행자",
       nickname: "기록하는 수집가",
-      recommend: ["경주", "런던", "도쿄"],
+      recommend: ["안동", "수원", "진주"],
       resultDesc:
         "검증된 루트와 안정적인 여행을 좋아합니다.",
       travelStyle:
@@ -392,7 +392,7 @@ function showResult() {
     ISFJ: {
       resultType: "안정형 여행자",
       nickname: "따뜻한 안식처",
-      recommend: ["강릉", "제주도", "후쿠오카"],
+      recommend: ["강릉", "속초", "하동"],
       resultDesc:
         "편안하고 안정감 있는 여행을 선호합니다.",
       travelStyle:
@@ -403,7 +403,7 @@ function showResult() {
     INTJ: {
       resultType: "전략형 여행자",
       nickname: "철저한 전략가",
-      recommend: ["독일", "스위스", "싱가포르"],
+      recommend: ["세종", "울산", "창원"],
       resultDesc:
         "효율과 계획 중심의 완벽한 여행을 추구합니다.",
       travelStyle:
@@ -414,7 +414,7 @@ function showResult() {
     INFJ: {
       resultType: "의미 탐구 여행자",
       nickname: "깊이를 찾는 여행자",
-      recommend: ["교토", "티베트", "인도"],
+      recommend: ["안동", "담양", "순천"],
       resultDesc:
         "의미와 감정을 남기는 여행을 좋아합니다.",
       travelStyle:
@@ -480,3 +480,27 @@ function showResult() {
     "/pages/travel-test/result.html";
 
 }
+leftButton.addEventListener("click", () => {
+
+  const q = questions[current];
+
+  selectAnswer(q.leftType);
+
+});
+
+rightButton.addEventListener("click", () => {
+
+  const q = questions[current];
+
+  selectAnswer(q.rightType);
+
+});
+
+updateQuestion();
+document.getElementById(
+  "back-main-btn"
+).addEventListener("click", () => {
+
+  window.location.href = "/";
+
+});

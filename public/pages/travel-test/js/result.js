@@ -1,29 +1,29 @@
 const resultType =
-localStorage.getItem(
-  "travel-result-type"
-);
+  localStorage.getItem(
+    "travel-result-type"
+  );
 
 const mbti =
-localStorage.getItem(
-  "travel-result-mbti"
-);
+  localStorage.getItem(
+    "travel-result-mbti"
+  );
 
 const desc =
-localStorage.getItem(
-  "travel-result-desc"
-);
+  localStorage.getItem(
+    "travel-result-desc"
+  );
 
 const recommend =
-JSON.parse(
-  localStorage.getItem(
-    "travel-result-recommend"
-  )
-);
+  JSON.parse(
+    localStorage.getItem(
+      "travel-result-recommend"
+    ) || "[]"
+  );
 
 const choice =
-localStorage.getItem(
-  "travel-result-choice"
-);
+  localStorage.getItem(
+    "travel-result-choice"
+  );
 
 document.getElementById(
   "result-type"
@@ -42,9 +42,9 @@ document.getElementById(
 ).innerText = choice;
 
 const recommendList =
-document.getElementById(
-  "recommend-list"
-);
+  document.getElementById(
+    "recommend-list"
+  );
 
 recommend.forEach(place => {
 
@@ -63,7 +63,7 @@ document.getElementById(
 ).addEventListener("click", () => {
 
   window.location.href =
-  "/pages/travel-test/travel-test.html";
+    "/pages/travel-test/travel-test.html";
 
 });
 
@@ -72,6 +72,6 @@ document.getElementById(
 ).addEventListener("click", () => {
 
   window.location.href =
-  "/";
+    "/";
 
 });
