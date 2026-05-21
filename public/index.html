@@ -4,15 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>어디루 - 국내여행 플랫폼</title>
-
   <link rel="stylesheet" href="/css/style.css" />
 
   <!-- 카카오맵 SDK -->
-  <script type="text/javascript"
-    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c7c498db86403ba673ecdce2316c007&libraries=services">
-    </script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c7c498db86403ba673ecdce2316c007&libraries=services">
+  </script>
 </head>
 
 <body>
@@ -37,14 +34,19 @@
     </div>
   </header>
 
+
   <!-- HERO -->
   <section class="hero-section">
-
     <div class="hero-slider">
-      <div class="slide active"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920" />
+      <div class="slide active">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920" alt="여행 이미지 1" />
       </div>
-      <div class="slide"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1920" /></div>
-      <div class="slide"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920" /></div>
+      <div class="slide">
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1920" alt="여행 이미지 2" />
+      </div>
+      <div class="slide">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920" alt="여행 이미지 3" />
+      </div>
     </div>
 
     <div class="overlay"></div>
@@ -52,7 +54,6 @@
     <div class="hero-content">
       <h1 id="hero-title">국내 어디든 떠나보세요</h1>
       <p>쉽고 빠르게 국내여행을 계획하고<br />감성 여행지를 탐험해보세요.</p>
-
       <div class="hero-buttons">
         <button id="hero-login-btn">로그인</button>
         <button id="hero-signup-btn">회원가입</button>
@@ -60,9 +61,10 @@
     </div>
   </section>
 
-  <!-- MAP -->
-  <section class="map-section">
 
+  <!-- MAP & PLANNER -->
+  <!-- ★ section 태그 대신 div 사용 → 공통 section CSS(width:90%) 영향 안 받음 -->
+  <div class="map-section">
     <div class="section-title">
       <h2>여행 플래너</h2>
       <p>출발지와 도착지를 기반으로 여행 동선을 확인하세요.</p>
@@ -70,12 +72,11 @@
 
     <div class="planner-container">
 
-      <!-- MAP -->
-      <div id="map" class="kakao-map"></div>
+      <!-- 카카오맵 -->
+      <div id="map"></div>
 
-      <!-- PANEL -->
+      <!-- 패널 -->
       <div class="planner-panel">
-
         <h3>여행 경로 설정</h3>
 
         <div class="planner-input">
@@ -90,21 +91,21 @@
 
         <button id="route-btn">여행 경로 확인</button>
 
-        <div id="route-info" style="margin-top:10px;font-size:14px;"></div>
+        <div id="route-info"></div>
 
         <div class="planner-games">
           <a href="/pages/lucky-ball/lucky-ball.html" class="planner-game-card">
             🎱 행운볼 뽑기
           </a>
-
           <a href="/pages/travel-test/travel-test.html" class="planner-game-card">
             ✈️ 여행 성향 테스트
           </a>
         </div>
-
       </div>
+
     </div>
-  </section>
+  </div>
+
 
   <!-- FOOTER -->
   <footer>

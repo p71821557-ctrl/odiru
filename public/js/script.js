@@ -1,5 +1,5 @@
 // ==========================================
-// 1. HERO TEXT & SLIDE (기존 기능 유지)
+// 1. HERO TEXT & SLIDE
 // ==========================================
 const heroTitle = document.getElementById("hero-title");
 const heroTexts = [
@@ -11,10 +11,7 @@ const heroTexts = [
 let heroIndex = 0;
 
 setInterval(() => {
-  heroIndex++;
-  if (heroIndex >= heroTexts.length) {
-    heroIndex = 0;
-  }
+  heroIndex = (heroIndex + 1) % heroTexts.length;
   if (heroTitle) heroTitle.innerText = heroTexts[heroIndex];
 }, 3000);
 
@@ -23,147 +20,187 @@ let slideIndex = 0;
 
 setInterval(() => {
   if (slides.length === 0) return;
-  slides.forEach((slide) => {
-    slide.classList.remove("active");
-  });
-  slideIndex++;
-  if (slideIndex >= slides.length) {
-    slideIndex = 0;
-  }
+  slides[slideIndex].classList.remove("active");
+  slideIndex = (slideIndex + 1) % slides.length;
   slides[slideIndex].classList.add("active");
 }, 4000);
 
 
 // ==========================================
-// 2. KAKAO MAP & PLANNER (새로운 카카오맵 기능)
+// 2. KAKAO MAP & PLANNER
 // ==========================================
 let map = null;
-let geocoder = null;
+let ps  = null;
 let startMarker = null;
-let endMarker = null;
-let clickLine = null;
+let endMarker   = null;
+let clickLine   = null;
 
-const routeBtn = document.getElementById("route-btn");
-const startPlace = document.getElementById("start-place");
-const endPlace = document.getElementById("end-place");
-const routeInfo = document.getElementById('route-info');
-
-// 💡 핵심: HTML 문서가 완전히 로드되어 지도 박스(#map)가 확실히 존재할 때 지도를 그립니다.
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById('map');
-  if (!container) return; // 지도 박스가 없으면 실행 안 함 (에러 방지)
+  if (!container) return;
 
-  const options = {
-    center: new kakao.maps.LatLng(36.3504, 127.3845), // 대한민국 중심(대전)
-    level: 12
-  };
+  map = new kakao.maps.Map(container, {
+    center: new kakao.maps.LatLng(36.3504, 127.3845),
+    level: 13
+  });
 
-  // 이제 안전하게 지도를 생성합니다.
-  map = new kakao.maps.Map(container, options);
-  geocoder = new kakao.maps.services.Geocoder();
+  // 한국 범위로 제한
+  const koreaBounds = new kakao.maps.LatLngBounds(
+    new kakao.maps.LatLng(33.0, 124.5),
+    new kakao.maps.LatLng(38.9, 131.9)
+  );
+  map.setMaxLevel(13);
+  map.setBounds(koreaBounds);
+
+  ps = new kakao.maps.services.Places();
 });
 
-routeBtn?.addEventListener("click", () => {
-  const start = startPlace.value;
-  const end = endPlace.value;
+// 키워드 → 좌표 변환
+function searchPlace(keyword) {
+  return new Promise((resolve, reject) => {
+    ps.keywordSearch(keyword, (result, status) => {
+      if (status === kakao.maps.services.Status.OK) {
+        resolve(new kakao.maps.LatLng(result[0].y, result[0].x));
+      } else {
+        reject(keyword);
+      }
+    });
+  });
+}
+
+// OSRM 실제 도로 거리/시간 계산
+async function getDrivingRoute(startCoords, endCoords) {
+  const url = `https://router.project-osrm.org/route/v1/driving/` +
+    `${startCoords.getLng()},${startCoords.getLat()};` +
+    `${endCoords.getLng()},${endCoords.getLat()}` +
+    `?overview=full&geometries=geojson`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  if (data.code !== 'Ok') throw new Error('경로 없음');
+
+  return {
+    distanceM: data.routes[0].distance,
+    durationSec: data.routes[0].duration,
+    geometry: data.routes[0].geometry.coordinates
+  };
+}
+
+// 비행 거리/시간 계산 (하버사인 공식 + 항공 우회율 1.3)
+function getFlightInfo(startCoords, endCoords) {
+  const R = 6371;
+  const dLat = (endCoords.getLat() - startCoords.getLat()) * Math.PI / 180;
+  const dLng = (endCoords.getLng() - startCoords.getLng()) * Math.PI / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(startCoords.getLat() * Math.PI / 180) *
+    Math.cos(endCoords.getLat() * Math.PI / 180) *
+    Math.sin(dLng / 2) ** 2;
+  const straightKm = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const flightKm = straightKm * 1.3;
+  const flightMin = Math.round(flightKm / 800 * 60 + 40); // 시속 800km + 이착륙 40분
+  return { flightKm, flightMin };
+}
+
+// 초 → "X시간 Y분" 변환
+function formatTime(seconds) {
+  const m = Math.round(seconds / 60);
+  return m >= 60 ? `${Math.floor(m / 60)}시간 ${m % 60}분` : `${m}분`;
+}
+
+const routeBtn   = document.getElementById("route-btn");
+const startPlace = document.getElementById("start-place");
+const endPlace   = document.getElementById("end-place");
+const routeInfo  = document.getElementById('route-info');
+
+routeBtn?.addEventListener("click", async () => {
+  const start = startPlace.value.trim();
+  const end   = endPlace.value.trim();
 
   if (!start || !end) {
     alert("출발지와 도착지를 모두 입력해주세요.");
     return;
   }
-
   if (!map) return;
+
   routeInfo.innerHTML = "경로를 계산 중입니다... 🔄";
 
-  // 기존 마커 및 선 초기화
   if (startMarker) startMarker.setMap(null);
-  if (endMarker) endMarker.setMap(null);
-  if (clickLine) clickLine.setMap(null);
+  if (endMarker)   endMarker.setMap(null);
+  if (clickLine)   clickLine.setMap(null);
 
-  // 출발지 검색
-  geocoder.addressSearch(start, function (startResult, startStatus) {
-    if (startStatus === kakao.maps.services.Status.OK) {
-      const startCoords = new kakao.maps.LatLng(startResult[0].y, startResult[0].x);
+  try {
+    const [startCoords, endCoords] = await Promise.all([
+      searchPlace(start),
+      searchPlace(end)
+    ]);
 
-      // 도착지 검색
-      geocoder.addressSearch(end, function (endResult, endStatus) {
-        if (endStatus === kakao.maps.services.Status.OK) {
-          const endCoords = new kakao.maps.LatLng(endResult[0].y, endResult[0].x);
+    // 마커 표시
+    startMarker = new kakao.maps.Marker({ map, position: startCoords });
+    endMarker   = new kakao.maps.Marker({ map, position: endCoords });
 
-          // 마커 표시
-          startMarker = new kakao.maps.Marker({ map: map, position: startCoords });
-          endMarker = new kakao.maps.Marker({ map: map, position: endCoords });
+    // OSRM 실제 도로 경로
+    const route = await getDrivingRoute(startCoords, endCoords);
 
-          // 선 그리기
-          clickLine = new kakao.maps.Polyline({
-            map: map,
-            path: [startCoords, endCoords],
-            strokeWeight: 5,
-            strokeColor: '#FF385C', // 어디루 시그니처 핑크
-            strokeOpacity: 0.8,
-            strokeStyle: 'solid'
-          });
+    // 실제 도로 따라가는 폴리라인
+    const path = route.geometry.map(([lng, lat]) => new kakao.maps.LatLng(lat, lng));
+    clickLine = new kakao.maps.Polyline({
+      map,
+      path,
+      strokeWeight: 5,
+      strokeColor: '#2979ff',
+      strokeOpacity: 0.8,
+      strokeStyle: 'solid'
+    });
 
-          // 거리 및 소요 시간 계산 (시속 60km 기준)
-          const distance = Math.round(clickLine.getLength());
-          const distanceKm = (distance / 1000).toFixed(1);
-          const totalMinutes = Math.round((distance / 1000) / 60 * 60);
+    // 자동차 정보
+    const driveKm   = (route.distanceM / 1000).toFixed(1);
+    const driveTime = formatTime(route.durationSec);
 
-          let timeString = "";
-          if (totalMinutes >= 60) {
-            const hours = Math.floor(totalMinutes / 60);
-            const mins = totalMinutes % 60;
-            timeString = `${hours}시간 ${mins}분`;
-          } else {
-            timeString = `${totalMinutes}분`;
-          }
+    // 비행기 정보
+    const { flightKm, flightMin } = getFlightInfo(startCoords, endCoords);
+    const flightTime = formatTime(flightMin * 60);
 
-          // 패널에 결과 출력
-          routeInfo.innerHTML = `
-                        <div style="background:#f8f9fa; padding:15px; border-radius:8px; border:1px solid #dee2e6; margin-top:15px; text-align:left;">
-                            <p style="margin:5px 0;">📍 <strong>총 거리:</strong> ${distanceKm} km</p>
-                            <p style="margin:5px 0; color:#FF385C;">⏱️ <strong>예상 소요 시간:</strong> 약 ${timeString}</p>
-                            <span style="font-size:11px; color:#868e96;">* 시속 60km 기준 직선거리 계산 결과입니다.</span>
-                        </div>
-                    `;
+    routeInfo.innerHTML = `
+      <div style="background:#f8f9fa;padding:15px;border-radius:12px;
+                  border:1px solid #dee2e6;margin-top:15px;text-align:left;">
+        <p style="font-weight:700;margin-bottom:10px;">📍 ${start} → ${end}</p>
+        <p style="margin:6px 0;">🚗 <strong>자동차</strong>&nbsp; ${driveKm} km &nbsp;|&nbsp; 약 ${driveTime}</p>
+        <p style="margin:6px 0;">✈️ <strong>비행기</strong>&nbsp; ${flightKm.toFixed(1)} km &nbsp;|&nbsp; 약 ${flightTime}</p>
+        <span style="font-size:11px;color:#868e96;margin-top:8px;display:block;">
+          * 자동차: 실제 도로 기준 / 비행기: 항공 우회거리 기준
+        </span>
+      </div>`;
 
-          // 두 마커가 모두 보이도록 지도 화면 조정
-          const bounds = new kakao.maps.LatLngBounds();
-          bounds.extend(startCoords);
-          bounds.extend(endCoords);
-          map.setBounds(bounds);
+    // 지도 범위 자동 조정
+    const bounds = new kakao.maps.LatLngBounds();
+    path.forEach(p => bounds.extend(p));
+    map.setBounds(bounds);
 
-        } else {
-          routeInfo.innerHTML = "";
-          alert('도착지 주소를 찾을 수 없습니다. 정확한 주소를 입력해주세요.');
-        }
-      });
-    } else {
-      routeInfo.innerHTML = "";
-      alert('출발지 주소를 찾을 수 없습니다. 정확한 주소를 입력해주세요.');
-    }
-  });
+  } catch (err) {
+    routeInfo.innerHTML = "";
+    alert(`장소를 찾을 수 없습니다. 더 구체적으로 입력해보세요.`);
+  }
 });
 
 
 // ==========================================
-// 3. AUTH & USER SESSION (백엔드 세션 로그인 연동)
+// 3. AUTH & USER SESSION
 // ==========================================
-const loginBtn = document.getElementById("login-btn");
-const signupBtn = document.getElementById("signup-btn");
-const logoutBtn = document.getElementById("logout-btn");
-const mypageBtn = document.getElementById("mypage-btn");
-const heroLoginBtn = document.getElementById("hero-login-btn");
+const loginBtn      = document.getElementById("login-btn");
+const signupBtn     = document.getElementById("signup-btn");
+const logoutBtn     = document.getElementById("logout-btn");
+const mypageBtn     = document.getElementById("mypage-btn");
+const heroLoginBtn  = document.getElementById("hero-login-btn");
 const heroSignupBtn = document.getElementById("hero-signup-btn");
 
-// 페이지가 켜지자마자 서버에 "로그인 되어있는 유저가 있는지" 물어봅니다.
 async function checkLoginStatus() {
   try {
     const response = await fetch("/api/user");
     const user = await response.json();
 
     if (user) {
-      // [로그인 상태] 헤더 버튼 교체 및 내 정보 표시
       if (loginBtn) {
         loginBtn.innerText = `${user.nickname}님`;
         loginBtn.onclick = () => { window.location.href = "/pages/mypage/mypage.html"; };
@@ -171,17 +208,14 @@ async function checkLoginStatus() {
       if (signupBtn) signupBtn.style.display = "none";
       if (logoutBtn) logoutBtn.style.display = "inline-block";
 
-      // 로그인 상태 변수 세션 저장 (이전 페이지 호환용)
       localStorage.setItem("isLogin", "true");
       localStorage.setItem("loginUser", user.nickname);
     } else {
-      // [비로그인 상태] 클릭 시 카카오 로그인 창으로 강제 이동
       localStorage.setItem("isLogin", "false");
       localStorage.removeItem("loginUser");
 
       const moveToKakao = () => { window.location.href = "/auth/kakao"; };
-
-      if (loginBtn) loginBtn.onclick = moveToKakao;
+      if (loginBtn)    loginBtn.onclick     = moveToKakao;
       if (heroLoginBtn) heroLoginBtn.onclick = moveToKakao;
     }
   } catch (err) {
@@ -189,18 +223,14 @@ async function checkLoginStatus() {
   }
 }
 
-// 초기화 실행
 checkLoginStatus();
 
-// 회원가입 버튼 클릭 시 카카오 로그인으로 통합 처리
 const moveSignup = () => { window.location.href = "/auth/kakao"; };
 signupBtn?.addEventListener("click", moveSignup);
 heroSignupBtn?.addEventListener("click", moveSignup);
 
-// 마이페이지 버튼 제한 규칙
 mypageBtn?.addEventListener("click", () => {
-  const isLogin = localStorage.getItem("isLogin");
-  if (isLogin !== "true") {
+  if (localStorage.getItem("isLogin") !== "true") {
     alert("로그인이 필요합니다.");
     window.location.href = "/auth/kakao";
     return;
@@ -208,10 +238,9 @@ mypageBtn?.addEventListener("click", () => {
   window.location.href = "/pages/mypage/mypage.html";
 });
 
-// 로그아웃 버튼 작동 규칙
 logoutBtn?.addEventListener("click", async () => {
   localStorage.removeItem("isLogin");
   localStorage.removeItem("loginUser");
   alert("로그아웃 되었습니다.");
-  window.location.href = "/logout"; // 백엔드 로그아웃 라우터 호출
+  window.location.href = "/logout";
 });
