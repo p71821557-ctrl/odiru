@@ -52,9 +52,13 @@ passport.use(
   new KakaoStrategy(
     {
       clientID: "05d30bdbb381878c14e4d47a15d86d8f",
-      callbackURL: "https://cameo-deceit-statute.ngrok-free.dev/auth/kakao/callback",
+      callbackURL: "http://localhost:3000/auth/kakao/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
+      console.log("=== 카카오 콜백 진입 ===");
+      console.log("accessToken:", accessToken);
+      console.log("profile:", JSON.stringify(profile, null, 2));
+
       try {
         let user = await User.findOne({ kakaoId: profile.id });
 
@@ -91,12 +95,18 @@ app.get("/", (req, res) => {
 // 카카오 로그인 시작
 app.get("/auth/kakao", passport.authenticate("kakao"));
 
-// ✅ 카카오 로그인 완료 → 메인 페이지로 리디렉션
+// 카카오 로그인 완료 → 메인 페이지로 리디렉션
 app.get(
   "/auth/kakao/callback",
+  (req, res, next) => {
+    console.log("=== /auth/kakao/callback 라우트 진입 ===");
+    console.log("query:", req.query);
+    next();
+  },
   passport.authenticate("kakao", { failureRedirect: "/" }),
   (req, res) => {
-    res.redirect("/");  // 로그인 성공 → 메인으로 이동
+    console.log("=== 로그인 성공, 메인으로 이동 ===");
+    res.redirect("/");
   }
 );
 

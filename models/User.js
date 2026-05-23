@@ -1,13 +1,9 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-
-  kakaoId: Number,
-
+  kakaoId: String,
   nickname: String,
-
   profileImage: String,
-
 });
 
 module.exports =
