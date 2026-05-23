@@ -30,10 +30,10 @@ setInterval(() => {
 // 2. KAKAO MAP & PLANNER
 // ==========================================
 let map = null;
-let ps  = null;
+let ps = null;
 let startMarker = null;
-let endMarker   = null;
-let clickLine   = null;
+let endMarker = null;
+let clickLine = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById('map');
@@ -109,14 +109,14 @@ function formatTime(seconds) {
   return m >= 60 ? `${Math.floor(m / 60)}시간 ${m % 60}분` : `${m}분`;
 }
 
-const routeBtn   = document.getElementById("route-btn");
+const routeBtn = document.getElementById("route-btn");
 const startPlace = document.getElementById("start-place");
-const endPlace   = document.getElementById("end-place");
-const routeInfo  = document.getElementById('route-info');
+const endPlace = document.getElementById("end-place");
+const routeInfo = document.getElementById('route-info');
 
 routeBtn?.addEventListener("click", async () => {
   const start = startPlace.value.trim();
-  const end   = endPlace.value.trim();
+  const end = endPlace.value.trim();
 
   if (!start || !end) {
     alert("출발지와 도착지를 모두 입력해주세요.");
@@ -127,8 +127,8 @@ routeBtn?.addEventListener("click", async () => {
   routeInfo.innerHTML = "경로를 계산 중입니다... 🔄";
 
   if (startMarker) startMarker.setMap(null);
-  if (endMarker)   endMarker.setMap(null);
-  if (clickLine)   clickLine.setMap(null);
+  if (endMarker) endMarker.setMap(null);
+  if (clickLine) clickLine.setMap(null);
 
   try {
     const [startCoords, endCoords] = await Promise.all([
@@ -138,7 +138,7 @@ routeBtn?.addEventListener("click", async () => {
 
     // 마커 표시
     startMarker = new kakao.maps.Marker({ map, position: startCoords });
-    endMarker   = new kakao.maps.Marker({ map, position: endCoords });
+    endMarker = new kakao.maps.Marker({ map, position: endCoords });
 
     // OSRM 실제 도로 경로
     const route = await getDrivingRoute(startCoords, endCoords);
@@ -155,7 +155,7 @@ routeBtn?.addEventListener("click", async () => {
     });
 
     // 자동차 정보
-    const driveKm   = (route.distanceM / 1000).toFixed(1);
+    const driveKm = (route.distanceM / 1000).toFixed(1);
     const driveTime = formatTime(route.durationSec);
 
     // 비행기 정보
@@ -188,11 +188,11 @@ routeBtn?.addEventListener("click", async () => {
 // ==========================================
 // 3. AUTH & USER SESSION
 // ==========================================
-const loginBtn      = document.getElementById("login-btn");
-const signupBtn     = document.getElementById("signup-btn");
-const logoutBtn     = document.getElementById("logout-btn");
-const mypageBtn     = document.getElementById("mypage-btn");
-const heroLoginBtn  = document.getElementById("hero-login-btn");
+const loginBtn = document.getElementById("login-btn");
+const signupBtn = document.getElementById("signup-btn");
+const logoutBtn = document.getElementById("logout-btn");
+const mypageBtn = document.getElementById("mypage-btn");
+const heroLoginBtn = document.getElementById("hero-login-btn");
 const heroSignupBtn = document.getElementById("hero-signup-btn");
 
 async function checkLoginStatus() {
@@ -214,9 +214,12 @@ async function checkLoginStatus() {
       localStorage.setItem("isLogin", "false");
       localStorage.removeItem("loginUser");
 
-      const moveToKakao = () => { window.location.href = "/auth/kakao"; };
-      if (loginBtn)    loginBtn.onclick     = moveToKakao;
-      if (heroLoginBtn) heroLoginBtn.onclick = moveToKakao;
+      const moveToLogin = () => {
+        window.location.href =
+          "/pages/login/login.html";
+      };
+      if (loginBtn) loginBtn.onclick = moveToLogin;
+      if (heroLoginBtn) heroLoginBtn.onclick = moveToLogin;
     }
   } catch (err) {
     console.error("로그인 상태 확인 실패:", err);
@@ -225,14 +228,17 @@ async function checkLoginStatus() {
 
 checkLoginStatus();
 
-const moveSignup = () => { window.location.href = "/auth/kakao"; };
+const moveSignup = () => {
+  window.location.href =
+  "/pages/login/signup.html";
+};
 signupBtn?.addEventListener("click", moveSignup);
 heroSignupBtn?.addEventListener("click", moveSignup);
 
 mypageBtn?.addEventListener("click", () => {
   if (localStorage.getItem("isLogin") !== "true") {
     alert("로그인이 필요합니다.");
-    window.location.href = "/auth/kakao";
+    window.location.href = "/pages/login/login.html";
     return;
   }
   window.location.href = "/pages/mypage/mypage.html";

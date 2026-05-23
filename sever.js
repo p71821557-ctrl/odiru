@@ -12,24 +12,32 @@ const app = express();
 
 
 
-/* JSON 사용 */
+// ==========================================
+// JSON
+// ==========================================
 app.use(express.json());
 
 
 
-/* ngrok 경고 제거 */
+// ==========================================
+// NGROK WARNING REMOVE
+// ==========================================
 app.use((req, res, next) => {
+
   res.setHeader(
     "ngrok-skip-browser-warning",
     "true"
   );
 
   next();
+
 });
 
 
 
-/* MongoDB 연결 */
+// ==========================================
+// MONGODB
+// ==========================================
 mongoose.connect(
   "mongodb://127.0.0.1:27017/odiru"
 )
@@ -48,8 +56,11 @@ mongoose.connect(
 
 
 
-/* 세션 설정 */
+// ==========================================
+// SESSION
+// ==========================================
 app.use(
+
   session({
 
     secret: "odiru-secret",
@@ -59,18 +70,23 @@ app.use(
     saveUninitialized: false,
 
   })
+
 );
 
 
 
-/* passport 초기화 */
+// ==========================================
+// PASSPORT
+// ==========================================
 app.use(passport.initialize());
 
 app.use(passport.session());
 
 
 
-/* 로그인 저장 */
+// ==========================================
+// LOGIN SAVE
+// ==========================================
 passport.serializeUser((user, done) => {
 
   done(null, user.id);
@@ -79,8 +95,11 @@ passport.serializeUser((user, done) => {
 
 
 
-/* 로그인 유지 */
+// ==========================================
+// LOGIN 유지
+// ==========================================
 passport.deserializeUser(
+
   async (id, done) => {
 
     try {
@@ -97,11 +116,14 @@ passport.deserializeUser(
     }
 
   }
+
 );
 
 
 
-/* 카카오 로그인 설정 */
+// ==========================================
+// KAKAO LOGIN
+// ==========================================
 passport.use(
 
   new KakaoStrategy(
@@ -112,7 +134,7 @@ passport.use(
       "05d30bdbb381878c14e4d47a15d86d8f",
 
       clientSecret:
-      "zkyFHRrBty1KTkyljiVTFVlj1wyCgfUJ",
+      "zkyFHRrBty1KTkyIjiVTFVIj1wyCgfUJ",
 
       callbackURL:
       "http://localhost:3000/auth/kakao/callback",
@@ -120,28 +142,16 @@ passport.use(
     },
 
     async (
+
       accessToken,
       refreshToken,
       profile,
       done
+
     ) => {
 
       console.log(
         "=== 카카오 콜백 진입 ==="
-      );
-
-      console.log(
-        "accessToken:",
-        accessToken
-      );
-
-      console.log(
-        "profile:",
-        JSON.stringify(
-          profile,
-          null,
-          2
-        )
       );
 
       try {
@@ -155,6 +165,7 @@ passport.use(
 
 
 
+        // 신규 회원
         if (!user) {
 
           user =
@@ -189,7 +200,10 @@ passport.use(
             user.nickname
           );
 
-        } else {
+        }
+
+        // 기존 회원
+        else {
 
           console.log(
             "기존 회원 로그인:",
@@ -216,64 +230,95 @@ passport.use(
 
 
 
-/* 정적 파일 */
+// ==========================================
+// STATIC
+// ==========================================
 app.use(
+
   express.static(
+
     path.join(__dirname, "public")
+
   )
+
 );
 
 
 
-/* 메인 페이지 */
+// ==========================================
+// MAIN PAGE
+// ==========================================
 app.get("/", (req, res) => {
 
   res.sendFile(
+
     path.join(
+
       __dirname,
       "public",
       "index.html"
+
     )
+
   );
 
 });
 
 
 
-/* 카카오 로그인 시작 */
+// ==========================================
+// LOGIN PAGE
+// ==========================================
+app.get("/login", (req, res) => {
+
+  res.sendFile(
+
+    path.join(
+
+      __dirname,
+      "public",
+      "pages",
+      "login",
+      "login.html"
+
+    )
+
+  );
+
+});
+
+
+
+// ==========================================
+// KAKAO LOGIN START
+// ==========================================
 app.get(
+
   "/auth/kakao",
 
   passport.authenticate("kakao")
+
 );
 
 
 
-/* 카카오 로그인 완료 */
+// ==========================================
+// KAKAO CALLBACK
+// ==========================================
 app.get(
 
   "/auth/kakao/callback",
 
-  (req, res, next) => {
-
-    console.log(
-      "=== /auth/kakao/callback 라우트 진입 ==="
-    );
-
-    console.log(
-      "query:",
-      req.query
-    );
-
-    next();
-
-  },
-
   passport.authenticate(
+
     "kakao",
+
     {
-      failureRedirect: "/",
+
+      failureRedirect: "/login",
+
     }
+
   ),
 
   (req, res) => {
@@ -290,7 +335,9 @@ app.get(
 
 
 
-/* 로그인 상태 확인 */
+// ==========================================
+// USER API
+// ==========================================
 app.get("/api/user", (req, res) => {
 
   if (!req.user) {
@@ -316,8 +363,11 @@ app.get("/api/user", (req, res) => {
 
 
 
-/* 여행 선택 저장 */
+// ==========================================
+// SAVE TRAVEL SELECTION
+// ==========================================
 app.post(
+
   "/save-selection",
 
   async (req, res) => {
@@ -337,11 +387,11 @@ app.post(
 
       }
 
-
-
       const {
+
         place,
         categories
+
       } = req.body;
 
 
@@ -379,8 +429,6 @@ app.post(
 
       console.log(err);
 
-
-
       res.status(500).json({
 
         success: false,
@@ -398,8 +446,11 @@ app.post(
 
 
 
-/* 저장된 여행 조회 */
+// ==========================================
+// MY TRAVEL LIST
+// ==========================================
 app.get(
+
   "/my-selections",
 
   async (req, res) => {
@@ -416,8 +467,6 @@ app.get(
 
       }
 
-
-
       const data =
       await TravelSelection.find({
 
@@ -427,7 +476,9 @@ app.get(
       })
 
       .sort({
+
         createdAt: -1
+
       });
 
 
@@ -444,8 +495,6 @@ app.get(
 
       console.log(err);
 
-
-
       res.status(500).json({
 
         success: false,
@@ -460,7 +509,9 @@ app.get(
 
 
 
-/* 로그아웃 */
+// ==========================================
+// LOGOUT
+// ==========================================
 app.get("/logout", (req, res) => {
 
   req.logout(() => {
@@ -473,10 +524,14 @@ app.get("/logout", (req, res) => {
 
 
 
-/* 서버 실행 */
+// ==========================================
+// SERVER START
+// ==========================================
 app.listen(
+
   3000,
   "0.0.0.0",
+
   () => {
 
     console.log(
@@ -484,4 +539,5 @@ app.listen(
     );
 
   }
+
 );
