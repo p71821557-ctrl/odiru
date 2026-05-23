@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // 여행지 단일 선택
+  // 여행지 선택
 
   const placeCards =
   document.querySelectorAll(".place-card");
@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  // 카테고리 복수 선택
+
+  // 카테고리 선택
 
   const categoryBtns =
   document.querySelectorAll(".cat-btn");
@@ -38,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   });
+
 
 
 
@@ -69,17 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
         "여행지와 카테고리를 모두 선택해주세요!"
       );
 
-    } else {
-
-      alert(
-        `🎉 선택 완료!\n지역: ${place}\n카테고리: ${cats.join(", ")}`
-      );
-
+      return;
     }
+
+    alert(
+      `🎉 선택 완료!\n지역 : ${place}\n카테고리 : ${cats.join(", ")}`
+    );
 
   });
 
 });
+
 
 
 
@@ -101,7 +103,8 @@ document.getElementById("mypage-btn");
 
 
 
-// 로그인 상태 확인
+
+// 로그인 상태
 
 const loginState =
 localStorage.getItem("isLogin");
@@ -109,7 +112,7 @@ localStorage.getItem("isLogin");
 const loginUser =
 localStorage.getItem("loginUser");
 
-if (loginState === "true") {
+if(loginState === "true"){
 
   loginBtn.innerText =
   `${loginUser}님`;
@@ -120,40 +123,36 @@ if (loginState === "true") {
   logoutBtn.style.display =
   "inline-block";
 
-  loginBtn.onclick = () => {
-
-    window.location.href =
-    "/pages/mypage/mypage.html";
-
-  };
-
-} else {
-
-  loginBtn.onclick = moveLogin;
-
 }
 
 
 
 
-// 로그인 이동
 
-function moveLogin() {
+// 로그인
+
+function moveLogin(){
 
   window.location.href =
-  "/pages/login/login.html";
+  "../login/login.html";
 
 }
 
+loginBtn?.addEventListener(
+  "click",
+  moveLogin
+);
 
 
 
-// 회원가입 이동
 
-function moveSignup() {
+
+// 회원가입
+
+function moveSignup(){
 
   window.location.href =
-  "/pages/login/signup.html";
+  "../login/signup.html";
 
 }
 
@@ -161,6 +160,7 @@ signupBtn?.addEventListener(
   "click",
   moveSignup
 );
+
 
 
 
@@ -174,22 +174,23 @@ mypageBtn?.addEventListener(
     const isLogin =
     localStorage.getItem("isLogin");
 
-    if (isLogin !== "true") {
+    if(isLogin !== "true"){
 
       alert("로그인이 필요합니다.");
 
       window.location.href =
-      "/pages/login/login.html";
+      "../login/login.html";
 
       return;
 
     }
 
     window.location.href =
-    "/pages/mypage/mypage.html";
+    "../mypage/mypage.html";
 
   }
 );
+
 
 
 

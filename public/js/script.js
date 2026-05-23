@@ -188,10 +188,12 @@ routeBtn?.addEventListener("click", async () => {
 // ==========================================
 // 3. AUTH & USER SESSION
 // ==========================================
-const loginBtn     = document.getElementById("login-btn");
-const logoutBtn    = document.getElementById("logout-btn");
-const mypageBtn    = document.getElementById("mypage-btn");
-const heroLoginBtn = document.getElementById("hero-login-btn");
+const loginBtn      = document.getElementById("login-btn");
+const signupBtn     = document.getElementById("signup-btn");
+const logoutBtn     = document.getElementById("logout-btn");
+const mypageBtn     = document.getElementById("mypage-btn");
+const heroLoginBtn  = document.getElementById("hero-login-btn");
+const heroSignupBtn = document.getElementById("hero-signup-btn");
 
 async function checkLoginStatus() {
   try {
@@ -201,19 +203,20 @@ async function checkLoginStatus() {
     if (user) {
       if (loginBtn) {
         loginBtn.innerText = `${user.nickname}님`;
-        loginBtn.style.background = "#2979ff";
-        loginBtn.style.color = "white";
         loginBtn.onclick = () => { window.location.href = "/pages/mypage/mypage.html"; };
       }
+      if (signupBtn) signupBtn.style.display = "none";
       if (logoutBtn) logoutBtn.style.display = "inline-block";
-      if (heroLoginBtn) {
-        heroLoginBtn.innerText = "마이페이지";
-        heroLoginBtn.onclick = () => { window.location.href = "/pages/mypage/mypage.html"; };
-      }
+
+      localStorage.setItem("isLogin", "true");
+      localStorage.setItem("loginUser", user.nickname);
     } else {
+      localStorage.setItem("isLogin", "false");
+      localStorage.removeItem("loginUser");
+
       const moveToKakao = () => { window.location.href = "/auth/kakao"; };
-      if (loginBtn)     loginBtn.onclick     = moveToKakao;
-      if (heroLoginBtn) heroLoginBtn.onclick  = moveToKakao;
+      if (loginBtn)    loginBtn.onclick     = moveToKakao;
+      if (heroLoginBtn) heroLoginBtn.onclick = moveToKakao;
     }
   } catch (err) {
     console.error("로그인 상태 확인 실패:", err);
@@ -222,10 +225,12 @@ async function checkLoginStatus() {
 
 checkLoginStatus();
 
-mypageBtn?.addEventListener("click", async () => {
-  const res = await fetch("/api/user");
-  const user = await res.json();
-  if (!user) {
+const moveSignup = () => { window.location.href = "/auth/kakao"; };
+signupBtn?.addEventListener("click", moveSignup);
+heroSignupBtn?.addEventListener("click", moveSignup);
+
+mypageBtn?.addEventListener("click", () => {
+  if (localStorage.getItem("isLogin") !== "true") {
     alert("로그인이 필요합니다.");
     window.location.href = "/auth/kakao";
     return;
@@ -233,8 +238,9 @@ mypageBtn?.addEventListener("click", async () => {
   window.location.href = "/pages/mypage/mypage.html";
 });
 
-logoutBtn?.addEventListener("click", () => {
-  if (confirm("로그아웃 하시겠습니까?")) {
-    window.location.href = "/logout";
-  }
+logoutBtn?.addEventListener("click", async () => {
+  localStorage.removeItem("isLogin");
+  localStorage.removeItem("loginUser");
+  alert("로그아웃 되었습니다.");
+  window.location.href = "/logout";
 });
