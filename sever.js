@@ -52,7 +52,7 @@ passport.use(
   new KakaoStrategy(
     {
       clientID: "05d30bdbb381878c14e4d47a15d86d8f",
-      clientSecret: "nGfYod9dIitR4VjgYfX3kSNGkTaZjqzK",
+      clientSecret: "zkyFHRrBty1KTkyljiVTFVlj1wyCgfUJ",
       callbackURL: "http://localhost:3000/auth/kakao/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
