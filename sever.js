@@ -105,7 +105,7 @@ passport.deserializeUser(
     try {
 
       const user =
-      await User.findById(id);
+        await User.findById(id);
 
       done(null, user);
 
@@ -131,13 +131,13 @@ passport.use(
     {
 
       clientID:
-      "05d30bdbb381878c14e4d47a15d86d8f",
+        "05d30bdbb381878c14e4d47a15d86d8f",
 
       clientSecret:
-      "zkyFHRrBty1KTkyIjiVTFVIj1wyCgfUJ",
+        "zkyFHRrBty1KTkyIjiVTFVIj1wyCgfUJ",
 
       callbackURL:
-      "http://localhost:3000/auth/kakao/callback",
+        "http://localhost:3000/auth/kakao/callback",
 
     },
 
@@ -154,46 +154,93 @@ passport.use(
         "=== 카카오 콜백 진입 ==="
       );
 
+      console.log(
+        JSON.stringify(
+          profile,
+          null,
+          2
+        )
+      );
+
       try {
 
+        // ==========================================
+        // 카카오 닉네임 가져오기
+        // ==========================================
+        const kakaoNickname =
+
+          profile._json
+            ?.properties
+            ?.nickname
+
+          ||
+
+          profile._json
+            ?.kakao_account
+            ?.profile
+            ?.nickname
+
+          ||
+
+          profile.displayName
+
+          ||
+
+          "카카오유저";
+
+
+
+        // ==========================================
+        // 카카오 프로필 이미지
+        // ==========================================
+        const kakaoProfileImage =
+
+          profile._json
+            ?.kakao_account
+            ?.profile
+            ?.profile_image_url
+
+          ||
+
+          profile._json
+            ?.properties
+            ?.profile_image
+
+          ||
+
+          "";
+
+
+
+        // ==========================================
+        // 기존 회원 찾기
+        // ==========================================
         let user =
-        await User.findOne({
+          await User.findOne({
 
-          kakaoId: profile.id
+            kakaoId: profile.id
 
-        });
+          });
 
 
 
-        // 신규 회원
+        // ==========================================
+        // 신규 회원가입
+        // ==========================================
         if (!user) {
 
           user =
-          await User.create({
+            await User.create({
 
-            kakaoId: profile.id,
+              kakaoId: profile.id,
 
-            nickname:
-            profile.username,
+              nickname:
+                kakaoNickname,
 
-            profileImage:
+              profileImage:
+                kakaoProfileImage,
 
-              profile._json
-              ?.kakao_account
-              ?.profile
-              ?.profile_image_url
-
-              ||
-
-              profile._json
-              ?.properties
-              ?.profile_image
-
-              ||
-
-              "",
-
-          });
+            });
 
           console.log(
             "신규 회원가입 완료:",
@@ -202,8 +249,32 @@ passport.use(
 
         }
 
-        // 기존 회원
+
+
+        // ==========================================
+        // 기존 회원 로그인
+        // ==========================================
         else {
+
+          // nickname 이상할 경우 자동 수정
+          if (
+
+            !user.nickname ||
+
+            user.nickname === "." ||
+
+            user.nickname === ".님" ||
+
+            user.nickname === ""
+
+          ) {
+
+            user.nickname =
+              kakaoNickname;
+
+            await user.save();
+
+          }
 
           console.log(
             "기존 회원 로그인:",
@@ -211,6 +282,8 @@ passport.use(
           );
 
         }
+
+
 
         return done(null, user);
 
@@ -349,13 +422,13 @@ app.get("/api/user", (req, res) => {
   res.json({
 
     nickname:
-    req.user.nickname,
+      req.user.nickname,
 
     profileImage:
-    req.user.profileImage,
+      req.user.profileImage,
 
     kakaoId:
-    req.user.kakaoId,
+      req.user.kakaoId,
 
   });
 
@@ -381,7 +454,7 @@ app.post(
           success: false,
 
           message:
-          "로그인이 필요합니다.",
+            "로그인이 필요합니다.",
 
         });
 
@@ -397,16 +470,16 @@ app.post(
 
 
       const newSelection =
-      await TravelSelection.create({
+        await TravelSelection.create({
 
-        userId:
-        req.user.kakaoId,
+          userId:
+            req.user.kakaoId,
 
-        place,
+          place,
 
-        categories,
+          categories,
 
-      });
+        });
 
 
 
@@ -434,7 +507,7 @@ app.post(
         success: false,
 
         message:
-        "서버 에러",
+          "서버 에러",
 
       });
 
@@ -468,18 +541,18 @@ app.get(
       }
 
       const data =
-      await TravelSelection.find({
+        await TravelSelection.find({
 
-        userId:
-        req.user.kakaoId,
+          userId:
+            req.user.kakaoId,
 
-      })
+        })
 
-      .sort({
+        .sort({
 
-        createdAt: -1
+          createdAt: -1
 
-      });
+        });
 
 
 
