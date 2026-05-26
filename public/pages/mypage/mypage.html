@@ -2,36 +2,82 @@
 <html lang="ko">
 
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
   <title>어디루 마이페이지</title>
-  <link rel="stylesheet" href="mypage.css" />
+
+  <link
+    rel="stylesheet"
+    href="mypage.css"
+  />
+
 </head>
 
 <body>
 
   <header>
+
     <h2>🌍 마이페이지</h2>
-    <button onclick="goMain()">← 메인</button>
+
+    <button onclick="goMain()">
+      ← 메인
+    </button>
+
   </header>
 
   <div class="container">
 
     <!-- 사용자 정보 -->
     <div class="card">
+
       <h3>👤 사용자</h3>
+
       <div id="profile-img-wrap"></div>
-      <p id="userInfo">불러오는 중...</p>
+
+      <p id="userInfo">
+        불러오는 중...
+      </p>
+
+    </div>
+
+    <!-- 내가 갔던 곳 -->
+    <div class="card">
+
+      <h3>📍 내가 갔던 곳</h3>
+
+      <div id="travel-list">
+        불러오는 중...
+      </div>
+
     </div>
 
     <!-- 로그아웃 -->
     <div class="card">
-      <button class="logout-btn" onclick="doLogout()">
+
+      <button
+        class="logout-btn"
+        onclick="doLogout()"
+      >
+
         로그아웃
+
       </button>
+
     </div>
 
   </div>
+
+  <!-- 카카오맵 SDK -->
+  <script
+    type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c7c498db86403ba673ecdce2316c007&libraries=services">
+  </script>
 
   <script src="mypage.js"></script>
 
