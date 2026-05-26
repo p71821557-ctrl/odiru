@@ -42,17 +42,17 @@ mongoose.connect(
   "mongodb://127.0.0.1:27017/odiru"
 )
 
-.then(() => {
+  .then(() => {
 
-  console.log("MongoDB 연결 성공");
+    console.log("MongoDB 연결 성공");
 
-})
+  })
 
-.catch((err) => {
+  .catch((err) => {
 
-  console.log(err);
+    console.log(err);
 
-});
+  });
 
 
 
@@ -137,7 +137,7 @@ passport.use(
         "zkyFHRrBty1KTkyIjiVTFVIj1wyCgfUJ",
 
       callbackURL:
-        "http://localhost:3000/auth/kakao/callback",
+        "https://cameo-deceit-statute.ngrok-free.dev/auth/kakao/callback",
 
     },
 
@@ -548,11 +548,11 @@ app.get(
 
         })
 
-        .sort({
+          .sort({
 
-          createdAt: -1
+            createdAt: -1
 
-        });
+          });
 
 
 
