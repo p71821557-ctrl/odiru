@@ -1,199 +1,591 @@
-body {
+/* RESET */
+* {
   margin: 0;
-  font-family: Arial;
-  background: #f5f7fb;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-header {
+body {
+  background: #f5f7fb;
+  font-family: Pretendard, 'Noto Sans KR', sans-serif;
+  color: #222;
+}
+
+
+/* ============================
+   HEADER (index.html 동일)
+============================ */
+.header {
+  width: 100%;
+  height: 80px;
+  background: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  background: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 0 60px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
 }
 
-.container {
+.logo-area img {
+  height: 70px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo-area img:hover  { transform: scale(1.08); }
+.logo-area img:active { transform: scale(0.96); }
+
+.nav {
+  display: flex;
+  gap: 35px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.nav a:hover { color: #2979ff; }
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.header-buttons button {
+  height: 42px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: inherit;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.btn-active {
+  background: #e8f0fe;
+  color: #2979ff;
+}
+
+.btn-active:hover { background: #d2e3fc; }
+
+#logout-btn {
+  background: #fff0f0;
+  color: #ff5252;
+  border: 1px solid #ffcdd2 !important;
+}
+
+#logout-btn:hover { background: #ffebee; }
+
+
+/* ============================
+   PAGE BODY
+============================ */
+.page-body {
   width: 90%;
-  margin: 30px auto;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 0 80px;
 }
 
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+.page-title-row {
+  margin-bottom: 36px;
+}
+
+.page-title-row h1 {
+  font-size: 34px;
+  font-weight: 900;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.page-title-row p {
+  font-size: 15px;
+  color: #888;
+}
+
+
+/* ============================
+   GRID LAYOUTS
+============================ */
+.grid-top {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
   margin-bottom: 20px;
 }
 
-.profile-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #0b57d0;
-  margin-bottom: 10px;
+.grid-bot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
-.profile-placeholder {
-  width: 80px;
-  height: 80px;
+
+/* ============================
+   CARD
+============================ */
+.card {
+  background: white;
+  border-radius: 24px;
+  padding: 28px 30px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.sec-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #aaa;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+
+/* ============================
+   PROFILE
+============================ */
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: #0b57d0;
+  background: #e6f1fb;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 36px;
-  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 900;
+  color: #185fa5;
+  border: 3px solid #b5d4f4;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
-button {
-  padding: 10px 15px;
-  background: #0b57d0;
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 18px;
+  font-weight: 900;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.profile-sub {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.kakao-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fee500;
+  color: #3c1e00;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-top: 6px;
+}
+
+
+/* ============================
+   STATS
+============================ */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat-item {
+  background: #f8faff;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 30px;
+  font-weight: 900;
+  color: #2979ff;
+  line-height: 1;
+}
+
+.stat-lbl {
+  font-size: 12px;
+  color: #888;
+  margin-top: 6px;
+}
+
+
+/* ============================
+   TENDENCY BARS
+============================ */
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.bar-name {
+  font-size: 13px;
+  color: #444;
+  min-width: 76px;
+}
+
+.bar-bg {
+  flex: 1;
+  height: 9px;
+  background: #f1f5f9;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bar-pct {
+  font-size: 12px;
+  font-weight: 700;
+  color: #aaa;
+  min-width: 34px;
+  text-align: right;
+}
+
+.tendency-msg {
+  font-size: 13px;
+  color: #888;
+  margin-top: 8px;
+}
+
+
+/* ============================
+   PLACE RECORD
+============================ */
+.add-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.add-row input {
+  flex: 1;
+  border: 1.5px solid #e8edf5;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+  background: #f8faff;
+  font-family: inherit;
+  color: #222;
+  outline: none;
+  transition: 0.2s;
+}
+
+.add-row input:focus { border-color: #2979ff; }
+
+.date-inp {
+  flex: 0 0 136px !important;
+}
+
+.add-btn {
+  background: #2979ff;
   color: white;
   border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-.logout-btn {
-  background: #e53935;
-  width: 100%;
-  padding: 14px;
-  font-size: 16px;
-  font-weight: bold;
   border-radius: 12px;
-  margin-top: 10px;
-}
-
-/* =========================
-   여행 리스트
-========================= */
-
-.travel-item {
-
-  padding: 18px 0;
-
-  border-bottom: 1px solid #eee;
-
-}
-
-.travel-item:last-child {
-
-  border-bottom: none;
-
-}
-
-.travel-item h4 {
-
-  margin: 0 0 10px;
-
-  font-size: 18px;
-
-  color: #222;
-
-}
-
-.travel-item p {
-
-  margin: 6px 0;
-
-  color: #555;
-
-  line-height: 1.5;
-
+  padding: 10px 16px;
   font-size: 14px;
-
-}
-
-.travel-item a {
-
-  display: inline-block;
-
-  margin-top: 10px;
-
-  text-decoration: none;
-
-  color: #0b57d0;
-
-  font-weight: bold;
-
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
   transition: 0.2s;
-
 }
 
-.travel-item a:hover {
+.add-btn:hover { background: #1a5fd6; }
 
-  opacity: 0.8;
-
-  transform: translateX(3px);
-
-}
-
-
-
-/* =========================
-   상단 로그인 유저
-========================= */
-
-.login-user {
-
+.place-scroll {
+  max-height: 240px;
+  overflow-y: auto;
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
+.place-scroll::-webkit-scrollbar { width: 4px; }
+.place-scroll::-webkit-scrollbar-thumb { background: #e0e7f0; border-radius: 99px; }
+
+.place-item {
+  display: flex;
   align-items: center;
-
   gap: 10px;
-
+  padding: 10px 14px;
+  background: #f8faff;
+  border-radius: 12px;
 }
 
-.top-profile {
-
-  width: 40px;
-
-  height: 40px;
-
+.pdot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
+  background: #2979ff;
+  flex-shrink: 0;
+}
 
-  object-fit: cover;
+.pname {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+}
 
-  border: 2px solid #0b57d0;
+.pdate {
+  font-size: 12px;
+  color: #aaa;
+}
 
+.pdel {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #ccc;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 4px;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.pdel:hover { color: #ff5252; }
+
+.empty-msg {
+  text-align: center;
+  padding: 28px;
+  font-size: 14px;
+  color: #bbb;
 }
 
 
+/* ============================
+   MAP
+============================ */
+.map-wrap {
+  border-radius: 18px;
+  overflow: hidden;
+  height: 340px;
+  background: #e9ecef;
+  position: relative;
+}
 
-/* =========================
-   반응형
-========================= */
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.map-placeholder-icon {
+  font-size: 42px;
+}
+
+.map-placeholder p {
+  font-size: 14px;
+  color: #aaa;
+}
+
+
+/* ============================
+   AI RECOMMENDATION
+============================ */
+.ai-card {
+  margin-bottom: 20px;
+}
+
+.ai-desc {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 18px;
+}
+
+.ai-btn {
+  width: 100%;
+  background: #2979ff;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.2s;
+  margin-bottom: 14px;
+}
+
+.ai-btn:hover { background: #1a5fd6; }
+.ai-btn:disabled { background: #90b8f8; cursor: not-allowed; }
+
+.ai-chip {
+  background: #f8faff;
+  border: 1.5px solid #e8edf5;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ai-chip:hover {
+  border-color: #2979ff;
+  background: #f0f5ff;
+  transform: translateY(-2px);
+}
+
+.chip-emoji { font-size: 24px; }
+
+.chip-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 3px;
+}
+
+.chip-reason {
+  font-size: 13px;
+  color: #888;
+}
+
+.chip-arrow {
+  margin-left: auto;
+  font-size: 18px;
+  color: #ccc;
+}
+
+.ai-loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.spin {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+
+/* ============================
+   LOGOUT CARD
+============================ */
+.logout-card {
+  background: white;
+  border-radius: 24px;
+  padding: 22px 30px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logout-card p {
+  font-size: 14px;
+  color: #888;
+}
+
+.logout-btn-real {
+  background: #fff0f0;
+  color: #ff5252;
+  border: 1.5px solid #ffcdd2;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: 0.2s;
+}
+
+.logout-btn-real:hover { background: #ffebee; }
+
+
+/* ============================
+   FOOTER
+============================ */
+footer {
+  width: 100%;
+  height: 110px;
+  background: #111;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 1024px) {
+  .grid-top,
+  .grid-bot {
+    grid-template-columns: 1fr;
+  }
+}
 
 @media (max-width: 768px) {
+  .header {
+    padding: 0 20px;
+  }
 
-  .container {
+  .nav { display: none; }
 
+  .page-body {
     width: 95%;
-
+    padding: 28px 0 60px;
   }
 
-  .card {
+  .page-title-row h1 { font-size: 26px; }
 
-    padding: 16px;
+  .card { padding: 20px; }
 
-  }
-
-  header h2 {
-
-    font-size: 20px;
-
-  }
-
-  .travel-item h4 {
-
-    font-size: 16px;
-
-  }
-
+  .add-row { flex-wrap: wrap; }
+  .date-inp { flex: 0 0 100% !important; }
 }
