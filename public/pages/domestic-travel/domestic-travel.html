@@ -1,198 +1,158 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>어디루 - 국내여행지 선택</title>
-
-  <link
-    rel="stylesheet"
-    href="css/domestic-travel.css"
-  />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/domestic-travel.css"/>
 </head>
-
 <body>
 
-  <!-- HEADER -->
+<header class="header">
+  <div class="logo" onclick="location.href='/'">어디<span>루</span></div>
+  <nav class="nav">
+    <a href="/domestic-travel">국내여행</a>
+    <a href="#">숙소예약</a>
+    <a href="#">여행코스</a>
+  </nav>
+  <div class="header-right" id="headerRight">
+    <button class="hbtn" id="mypageBtn">마이페이지</button>
+    <button class="hbtn" id="loginBtn">로그인</button>
+    <button class="hbtn logout-btn" id="logoutBtn" style="display:none;">로그아웃</button>
+  </div>
+</header>
 
-  <header class="header">
+<div class="main">
 
-    <div class="logo-area">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-inner">
 
-      <a href="/">
-
-        <img
-          src="images/odiru.png"
-          alt="어디루 로고"
-        />
-
-      </a>
-
-    </div>
-
-    <nav class="nav">
-
-      <a href="javascript:location.reload()">
-        국내여행
-      </a>
-
-      <a href="#">
-        숙소예약
-      </a>
-
-      <a href="#">
-        여행코스
-      </a>
-
-    </nav>
-
-    <div class="header-buttons">
-
-      <button id="mypage-btn">
-        마이페이지
-      </button>
-
-      <button id="login-btn">
-        로그인
-      </button>
-
-      <button id="signup-btn">
-        회원가입
-      </button>
-
-      <button
-        id="logout-btn"
-        style="display:none;"
-      >
-        로그아웃
-      </button>
-
-    </div>
-
-  </header>
-
-
-
-
-
-  <!-- CONTENT -->
-
-  <div class="content-container">
-
-    <div class="section-header">
-
-      <div class="section-title">
-        여행지 선택
+      <div class="sidebar-label">선택된 지역</div>
+      <div class="region-display empty" id="selRegion">
+        <div class="region-dot"></div>
+        <div class="region-name" id="selRegionText">지도에서 지역을 선택하세요</div>
       </div>
 
-    </div>
+      <div class="sidebar-label">카테고리 선택</div>
 
-    <div class="travel-grid">
-
-      <div class="place-card">
-
-        <img
-          src="images/busan.jpg"
-          alt="부산"
-        />
-
-        <div class="place-name">
-          부산
+      <div class="cat-group">
+        <div class="cat-group-title">🍽 음식 · 카페</div>
+        <div class="cat-tags">
+          <span class="cat-tag" data-cat="맛집">맛집</span>
+          <span class="cat-tag" data-cat="카페">카페</span>
+          <span class="cat-tag" data-cat="야시장">야시장</span>
+          <span class="cat-tag" data-cat="전통음식">전통음식</span>
         </div>
-
       </div>
 
-      <div class="place-card">
-
-        <img
-          src="images/gwangju.jpg"
-          alt="광주"
-        />
-
-        <div class="place-name">
-          광주
+      <div class="cat-group">
+        <div class="cat-group-title">🏛 관광 · 문화</div>
+        <div class="cat-tags">
+          <span class="cat-tag" data-cat="관광명소">관광명소</span>
+          <span class="cat-tag" data-cat="문화">문화</span>
+          <span class="cat-tag" data-cat="박물관">박물관</span>
+          <span class="cat-tag" data-cat="역사">역사</span>
+          <span class="cat-tag" data-cat="전통시장">전통시장</span>
         </div>
-
       </div>
 
-      <div class="place-card">
-
-        <img
-          src="images/seoul.jpg"
-          alt="서울"
-        />
-
-        <div class="place-name">
-          서울
+      <div class="cat-group">
+        <div class="cat-group-title">🌿 자연 · 힐링</div>
+        <div class="cat-tags">
+          <span class="cat-tag" data-cat="자연">자연</span>
+          <span class="cat-tag" data-cat="바다">바다</span>
+          <span class="cat-tag" data-cat="산·등산">산·등산</span>
+          <span class="cat-tag" data-cat="힐링">힐링</span>
+          <span class="cat-tag" data-cat="캠핑">캠핑</span>
+          <span class="cat-tag" data-cat="온천">온천</span>
         </div>
-
       </div>
 
-      <div class="place-card">
-
-        <img
-          src="images/jeonju.jpg"
-          alt="전주"
-        />
-
-        <div class="place-name">
-          전주
+      <div class="cat-group">
+        <div class="cat-group-title">🎡 액티비티</div>
+        <div class="cat-tags">
+          <span class="cat-tag" data-cat="놀이공원">놀이공원</span>
+          <span class="cat-tag" data-cat="체험">체험</span>
+          <span class="cat-tag" data-cat="레저스포츠">레저스포츠</span>
+          <span class="cat-tag" data-cat="드라이브">드라이브</span>
         </div>
+      </div>
 
+      <div class="cat-group">
+        <div class="cat-group-title">💑 테마</div>
+        <div class="cat-tags">
+          <span class="cat-tag" data-cat="커플">커플</span>
+          <span class="cat-tag" data-cat="가족">가족</span>
+          <span class="cat-tag" data-cat="혼행">혼행</span>
+          <span class="cat-tag" data-cat="포토스팟">포토스팟</span>
+          <span class="cat-tag" data-cat="야경">야경</span>
+        </div>
       </div>
 
     </div>
-
-
-
-
-
-    <div class="section-header">
-
-      <div class="section-title">
-        카테고리 선택
-      </div>
-
+    <div class="sidebar-footer">
+      <button class="btn-go" id="btnGo" disabled>AI 여행지 추천 받기 →</button>
     </div>
-
-    <div class="category-grid">
-
-      <button class="cat-btn">문화</button>
-      <button class="cat-btn">관광</button>
-      <button class="cat-btn">놀이공원</button>
-      <button class="cat-btn">힐링</button>
-      <button class="cat-btn">자연</button>
-      <button class="cat-btn">체험</button>
-      <button class="cat-btn">커플</button>
-      <button class="cat-btn">가족</button>
-      <button class="cat-btn">바다</button>
-
-    </div>
-
-
-
-
-
-    <div class="footer-area">
-
-      <button
-        class="btn-complete"
-        id="submitBtn"
-      >
-        선택 완료
-      </button>
-
-    </div>
-
   </div>
 
-  <script src="js/domestic-travel.js"></script>
+  <!-- MAP -->
+  <div class="map-area">
+    <div class="map-hint" id="mapHint">지역을 클릭하여 선택하세요</div>
 
+    <svg id="koreaMap" viewBox="0 0 420 620" xmlns="http://www.w3.org/2000/svg">
+      <path class="region-path" data-region="경기도"   d="M155,80 L200,72 L240,78 L260,95 L265,120 L255,145 L235,158 L210,165 L185,160 L162,148 L148,130 L145,108 Z"/>
+      <path class="region-path" data-region="서울"     d="M187,108 L210,104 L228,112 L230,128 L215,138 L195,136 L182,126 Z"/>
+      <path class="region-path" data-region="인천"     d="M140,112 L162,108 L165,126 L155,138 L138,132 L132,120 Z"/>
+      <path class="region-path" data-region="강원도"   d="M240,72 L295,65 L340,75 L360,100 L358,140 L345,168 L320,180 L290,182 L265,175 L255,155 L260,125 L255,100 Z"/>
+      <path class="region-path" data-region="충청북도" d="M210,162 L248,158 L268,172 L272,200 L260,220 L238,228 L215,222 L200,208 L198,185 Z"/>
+      <path class="region-path" data-region="충청남도" d="M148,162 L185,158 L198,168 L200,190 L192,215 L170,228 L148,235 L128,225 L118,205 L122,180 Z"/>
+      <path class="region-path" data-region="세종"     d="M190,190 L208,186 L215,198 L208,210 L192,212 L183,200 Z"/>
+      <path class="region-path" data-region="대전"     d="M195,208 L215,204 L225,218 L218,232 L200,235 L188,222 Z"/>
+      <path class="region-path" data-region="경상북도" d="M268,168 L315,172 L345,168 L360,195 L358,235 L340,262 L315,275 L290,278 L268,265 L258,245 L256,220 Z"/>
+      <path class="region-path" data-region="대구"     d="M290,255 L310,250 L320,262 L315,278 L297,282 L283,272 Z"/>
+      <path class="region-path" data-region="울산"     d="M340,290 L360,285 L368,305 L360,325 L342,328 L330,315 Z"/>
+      <path class="region-path" data-region="경상남도" d="M258,268 L288,272 L318,278 L340,295 L345,325 L330,350 L305,362 L278,358 L255,342 L245,318 L248,290 Z"/>
+      <path class="region-path" data-region="부산"     d="M322,338 L345,330 L355,348 L348,365 L330,368 L315,358 Z"/>
+      <path class="region-path" data-region="전라북도" d="M148,232 L175,228 L198,222 L215,228 L220,258 L208,282 L185,295 L160,292 L140,278 L132,255 Z"/>
+      <path class="region-path" data-region="전라남도" d="M140,295 L168,290 L195,295 L212,310 L215,342 L200,368 L175,382 L148,378 L125,360 L115,335 L120,308 Z"/>
+      <path class="region-path" data-region="광주"     d="M162,318 L185,314 L194,330 L186,346 L165,348 L153,334 L156,320 Z"/>
+      <path class="region-path" data-region="제주도"   d="M138,478 L185,470 L220,480 L224,504 L206,520 L176,524 L148,516 L132,498 Z"/>
+
+      <text class="region-label" x="205" y="118">서울</text>
+      <text class="region-label" x="147" y="121">인천</text>
+      <text class="region-label" x="204" y="150">경기도</text>
+      <text class="region-label" x="305" y="118">강원도</text>
+      <text class="region-label" x="152" y="200">충청남도</text>
+      <text class="region-label" x="238" y="196">충청북도</text>
+      <text class="region-label" x="199" y="195">세종</text>
+      <text class="region-label" x="208" y="220">대전</text>
+      <text class="region-label" x="310" y="220">경상북도</text>
+      <text class="region-label" x="300" y="265">대구</text>
+      <text class="region-label" x="295" y="318">경상남도</text>
+      <text class="region-label" x="335" y="348">부산</text>
+      <text class="region-label" x="352" y="307">울산</text>
+      <text class="region-label" x="176" y="258">전라북도</text>
+      <text class="region-label" x="173" y="336">광주</text>
+      <text class="region-label" x="168" y="352">전라남도</text>
+      <text class="region-label" x="178" y="494">제주도</text>
+    </svg>
+
+    <!-- 결과 패널 -->
+    <div class="result-panel" id="resultPanel">
+      <div class="result-header">
+        <button class="btn-back" id="btnBack">← 돌아가기</button>
+        <h2 id="resultTitle"></h2>
+        <span class="cats-badge" id="resultCats"></span>
+      </div>
+      <div id="cardsContainer"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/domestic-travel.js"></script>
 </body>
-
 </html>
