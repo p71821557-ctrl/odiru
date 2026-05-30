@@ -31,9 +31,18 @@ setInterval(() => {
 // ==========================================
 let map = null;
 let ps = null;
-let startMarker = null;
-let endMarker = null;
-let clickLine = null;
+
+// 마커·폴리라인을 배열로 관리
+let markers = [];
+let polylines = [];
+
+// 이전 경로 전체 초기화
+function clearRoute() {
+  markers.forEach(m => m.setMap(null));
+  polylines.forEach(p => p.setMap(null));
+  markers = [];
+  polylines = [];
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById('map');
@@ -44,13 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     level: 13
   });
 
-  // 한국 범위로 제한
-  const koreaBounds = new kakao.maps.LatLngBounds(
-    new kakao.maps.LatLng(33.0, 124.5),
-    new kakao.maps.LatLng(38.9, 131.9)
-  );
   map.setMaxLevel(13);
-  map.setBounds(koreaBounds);
 
   ps = new kakao.maps.services.Places();
 });
@@ -99,7 +102,7 @@ function getFlightInfo(startCoords, endCoords) {
     Math.sin(dLng / 2) ** 2;
   const straightKm = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   const flightKm = straightKm * 1.3;
-  const flightMin = Math.round(flightKm / 800 * 60 + 40); // 시속 800km + 이착륙 40분
+  const flightMin = Math.round(flightKm / 800 * 60 + 40);
   return { flightKm, flightMin };
 }
 
@@ -126,9 +129,8 @@ routeBtn?.addEventListener("click", async () => {
 
   routeInfo.innerHTML = "경로를 계산 중입니다... 🔄";
 
-  if (startMarker) startMarker.setMap(null);
-  if (endMarker) endMarker.setMap(null);
-  if (clickLine) clickLine.setMap(null);
+  // ★ 이전 마커·폴리라인 전부 제거
+  clearRoute();
 
   try {
     const [startCoords, endCoords] = await Promise.all([
@@ -136,16 +138,17 @@ routeBtn?.addEventListener("click", async () => {
       searchPlace(end)
     ]);
 
-    // 마커 표시
-    startMarker = new kakao.maps.Marker({ map, position: startCoords });
-    endMarker = new kakao.maps.Marker({ map, position: endCoords });
+    // 마커 생성 후 배열에 저장
+    const sMarker = new kakao.maps.Marker({ map, position: startCoords });
+    const eMarker = new kakao.maps.Marker({ map, position: endCoords });
+    markers.push(sMarker, eMarker);
 
     // OSRM 실제 도로 경로
     const route = await getDrivingRoute(startCoords, endCoords);
 
-    // 실제 도로 따라가는 폴리라인
+    // 폴리라인 생성 후 배열에 저장
     const path = route.geometry.map(([lng, lat]) => new kakao.maps.LatLng(lat, lng));
-    clickLine = new kakao.maps.Polyline({
+    const line = new kakao.maps.Polyline({
       map,
       path,
       strokeWeight: 5,
@@ -153,6 +156,7 @@ routeBtn?.addEventListener("click", async () => {
       strokeOpacity: 0.8,
       strokeStyle: 'solid'
     });
+    polylines.push(line);
 
     // 자동차 정보
     const driveKm = (route.distanceM / 1000).toFixed(1);
@@ -215,8 +219,7 @@ async function checkLoginStatus() {
       localStorage.removeItem("loginUser");
 
       const moveToLogin = () => {
-        window.location.href =
-          "/pages/login/login.html";
+        window.location.href = "/pages/login/login.html";
       };
       if (loginBtn) loginBtn.onclick = moveToLogin;
       if (heroLoginBtn) heroLoginBtn.onclick = moveToLogin;
@@ -229,8 +232,7 @@ async function checkLoginStatus() {
 checkLoginStatus();
 
 const moveSignup = () => {
-  window.location.href =
-  "/pages/login/signup.html";
+  window.location.href = "/pages/login/signup.html";
 };
 signupBtn?.addEventListener("click", moveSignup);
 heroSignupBtn?.addEventListener("click", moveSignup);
