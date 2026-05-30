@@ -10,33 +10,35 @@ body{
 
 /* ── HEADER ── */
 .header{
-  width:100%; height:64px;
+  width:100%; height:80px;
   background:#fff;
   border-bottom:1px solid #e8edf2;
   display:flex; align-items:center; justify-content:space-between;
-  padding:0 40px;
+  padding:0 60px;
   position:fixed; top:0; left:0; z-index:200;
-  box-shadow:0 1px 8px rgba(0,0,0,0.05);
+  box-shadow:0 2px 15px rgba(0,0,0,0.05);
 }
-.logo-area img{ height:48px; cursor:pointer; }
-.nav{ display:flex; gap:28px; }
-.nav a{ text-decoration:none; color:#555; font-weight:500; font-size:15px; transition:color .2s; }
+.logo-area img{ height:70px; cursor:pointer; transition:all 0.3s ease; }
+.logo-area img:hover{ transform:scale(1.08); }
+.logo-area img:active{ transform:scale(0.96); }
+.nav{ display:flex; gap:35px; }
+.nav a{ text-decoration:none; color:#333; font-weight:700; font-size:15px; transition:color .3s; }
 .nav a:hover{ color:#00a2ed; }
-.header-buttons{ display:flex; gap:8px; }
+.header-buttons{ display:flex; gap:10px; }
 .header-buttons button{
-  height:36px; padding:0 16px;
-  border:1px solid #dde1e7; border-radius:10px;
-  background:#fff; font-size:13px; font-weight:600;
+  height:42px; padding:0 18px;
+  border:none; border-radius:12px;
+  background:#fff; font-size:13px; font-weight:bold;
   cursor:pointer; font-family:'Noto Sans KR',sans-serif;
   transition:all .2s; color:#444;
 }
-.header-buttons button:hover{ border-color:#00a2ed; color:#00a2ed; }
+.header-buttons button:hover{ color:#00a2ed; }
 
 /* ── LAYOUT ── */
 .page-wrap{
   display:flex;
-  height:calc(100vh - 64px);
-  margin-top:64px;
+  height:calc(100vh - 80px);
+  margin-top:80px;
 }
 
 /* ── SIDEBAR ── */
