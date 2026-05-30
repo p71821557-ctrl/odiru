@@ -10481,16 +10481,37 @@ btnBack.addEventListener('click', () => {
    ============================================================ */
 async function loadUser() {
   try {
-    const res  = await fetch('/api/user');
+    const res = await fetch('/api/user');
     const user = await res.json();
     const btns = document.getElementById('headerBtns');
+
     if (user) {
+      // 로그인 상태 - 마이페이지 + 로그아웃
       btns.innerHTML = `
-        <button onclick="location.href='/mypage'">마이페이지</button>
+        <button onclick="location.href='/pages/mypage/mypage.html'">마이페이지</button>
         <button onclick="location.href='/logout'" style="border-color:#e74c3c;color:#e74c3c;">로그아웃</button>
       `;
+    } else {
+      // 비로그인 상태 - 버튼에 이벤트 연결
+      document.getElementById('mypage-btn').addEventListener('click', () => {
+        alert('로그인이 필요합니다.');
+        location.href = '/pages/login/login.html';
+      });
+      document.getElementById('login-btn').addEventListener('click', () => {
+        location.href = '/pages/login/login.html';
+      });
     }
-  } catch(e) {}
+
+  } catch(e) {
+    // API 실패 시에도 버튼 동작하게
+    document.getElementById('mypage-btn').addEventListener('click', () => {
+      alert('로그인이 필요합니다.');
+      location.href = '/pages/login/login.html';
+    });
+    document.getElementById('login-btn').addEventListener('click', () => {
+      location.href = '/pages/login/login.html';
+    });
+  }
 }
 
 /* ============================================================
