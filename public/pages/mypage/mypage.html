@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>어디루 - 마이페이지</title>
   <link rel="stylesheet" href="mypage.css" />
-
-  <!-- 카카오맵 SDK -->
   <script type="text/javascript"
     src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c7c498db86403ba673ecdce2316c007&libraries=services">
   </script>
@@ -15,7 +13,6 @@
 
 <body>
 
-  <!-- HEADER (index.html과 동일) -->
   <header class="header">
     <div class="logo-area">
       <a href="/"><img src="/images/odiru.png" alt="어디루 로고" /></a>
@@ -26,13 +23,13 @@
       <a href="#">여행코스</a>
     </nav>
     <div class="header-buttons">
-      <button id="mypage-btn" class="btn-active">마이페이지</button>
-      <button id="logout-btn" onclick="doLogout()">로그아웃</button>
+      <button id="mypage-btn">마이페이지</button>
+      <button id="login-btn"></button>
+      <button id="logout-btn" style="display:none;">로그아웃</button>
     </div>
   </header>
 
 
-  <!-- BODY -->
   <div class="page-body">
 
     <div class="page-title-row">
@@ -42,11 +39,8 @@
       </div>
     </div>
 
-
-    <!-- ROW 1: 프로필 + 성향 분석 -->
     <div class="grid-top">
 
-      <!-- 프로필 카드 -->
       <div class="card">
         <div class="profile-row">
           <div class="avatar" id="avatar-box">여</div>
@@ -72,7 +66,6 @@
         </div>
       </div>
 
-      <!-- 성향 분석 카드 -->
       <div class="card">
         <div class="sec-label">여행 성향 분석</div>
         <div id="tendency-bars">
@@ -102,11 +95,8 @@
 
     </div>
 
-
-    <!-- ROW 2: 여행지 기록 + 지도 -->
     <div class="grid-bot">
 
-      <!-- 여행지 기록 카드 -->
       <div class="card">
         <div class="sec-label">방문한 여행지 기록</div>
         <div class="add-row">
@@ -119,7 +109,6 @@
         </div>
       </div>
 
-      <!-- 지도 카드 -->
       <div class="card">
         <div class="sec-label">내 여행지 지도</div>
         <div class="map-wrap" id="map-wrap">
@@ -133,8 +122,6 @@
 
     </div>
 
-
-    <!-- ROW 3: AI 추천 -->
     <div class="card ai-card">
       <div class="sec-label">AI 여행지 추천</div>
       <p class="ai-desc">방문 기록 기반으로 어울리는 여행지를 추천해드려요.</p>
@@ -142,8 +129,6 @@
       <div id="ai-result-area"></div>
     </div>
 
-
-    <!-- 로그아웃 -->
     <div class="logout-card">
       <p>계정에서 로그아웃하시겠어요?</p>
       <button class="logout-btn-real" onclick="doLogout()">로그아웃</button>
@@ -151,8 +136,6 @@
 
   </div>
 
-
-  <!-- FOOTER -->
   <footer>
     <p>© 2026 Odiro ALL RIGHTS RESERVED</p>
   </footer>
