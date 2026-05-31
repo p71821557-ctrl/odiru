@@ -391,3 +391,27 @@ body {
 @media (max-width: 550px) {
   .recommend-grid { grid-template-columns: 1fr; }
 }
+/* ==================== 태그 활성 상태 (카드 클릭 시) ==================== */
+.recommend-tags .tag.tag-active {
+  background: #2979ff;
+  color: white;
+  box-shadow: 0 2px 8px rgba(41, 121, 255, 0.35);
+}
+
+/* ==================== 거리 표시 개선 ==================== */
+.course-route-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0f7ff;
+  border-left: 3px solid #00a2ed;
+  border-radius: 0 8px 8px 0;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  color: #444;
+  margin-bottom: 4px;
+}
+.route-icon  { font-size: 0.85rem; }
+.route-dist  { font-weight: 700; color: #00a2ed; }
+.route-sep   { color: #bbb; }
+.route-time  { color: #555; }
