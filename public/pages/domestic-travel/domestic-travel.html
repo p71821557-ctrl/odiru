@@ -1,140 +1,112 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>어디루 - 국내여행지 선택</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/domestic-travel.css"/>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c7c498db86403ba673ecdce2316c007&libraries=services"></script>
+  <link rel="stylesheet" href="css/domestic-travel.css">
+  <!-- 카카오맵 SDK (index.html과 동일한 키 사용) -->
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8c7c498db86403ba673ecdce2316c007&libraries=services">
+  </script>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="logo-area">
-    <a href="/"><img src="/images/odiru.png" alt="어디루 로고"/></a>
-  </div>
-  <nav class="nav">
-    <a href="/pages/domestic-travel/domestic-travel.html">국내여행</a>
-    <a href="#">숙소예약</a>
-    <a href="#">여행코스</a>
-  </nav>
-  <div class="header-buttons" id="headerBtns">
-    <button id="mypage-btn">마이페이지</button>
-    <button id="login-btn">로그인</button>
-    <button id="logout-btn" style="display:none;">로그아웃</button>
-  </div>
-</header>
+  <header class="header">
+    <div class="logo-area">
+      <a href="../../index.html">
+        <img src="images/odiru.png" alt="어디루 로고" />
+      </a>
+    </div>
+    <nav class="nav">
+      <a href="domestic-travel.html">국내여행</a>
+      <a href="#">숙소예약</a>
+      <a href="#">여행코스</a>
+    </nav>
+    <div class="header-buttons">
+      <button id="mypage-btn">마이페이지</button>
+      <button id="login-btn">로그인</button>
+      <button id="signup-btn">회원가입</button>
+      <button id="logout-btn" style="display:none;">로그아웃</button>
+    </div>
+  </header>
 
-<!-- MAIN -->
-<div class="page-wrap">
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h1>국내 어디든 떠나보세요</h1>
+      <p>쉽고 빠르게 국내여행을 계획하고<br>감성 여행지를 탐험해보세요.</p>
+    </div>
+  </section>
 
-  <!-- 사이드바 -->
-  <aside class="sidebar">
-    <div class="sidebar-inner">
+  <div class="content-container">
 
-      <div class="step-label">STEP 1 &nbsp;여행지 선택</div>
-      <div class="selected-region" id="selRegion">
-        <span class="sel-dot"></span>
-        <span id="selRegionText">지도에서 지역을 클릭하세요</span>
+    <div class="section-header">
+      <div class="section-title">여행지 선택</div>
+    </div>
+    <div class="travel-grid">
+      <div class="place-card">
+        <img src="images/busan.jpg" alt="부산">
+        <div class="place-name">부산</div>
       </div>
-
-      <div class="step-label" style="margin-top:24px;">STEP 2 &nbsp;카테고리</div>
-
-      <div class="cat-group">
-        <div class="cat-group-title">🍽 음식 · 카페</div>
-        <div class="cat-tags">
-          <span class="cat-tag" data-cat="맛집">맛집</span>
-          <span class="cat-tag" data-cat="카페">카페</span>
-          <span class="cat-tag" data-cat="야시장">야시장</span>
-          <span class="cat-tag" data-cat="전통음식">전통음식</span>
-        </div>
+      <div class="place-card">
+        <img src="images/gwangju.jpg" alt="광주">
+        <div class="place-name">광주</div>
       </div>
-
-      <div class="cat-group">
-        <div class="cat-group-title">🏛 관광 · 문화</div>
-        <div class="cat-tags">
-          <span class="cat-tag" data-cat="관광명소">관광명소</span>
-          <span class="cat-tag" data-cat="문화">문화</span>
-          <span class="cat-tag" data-cat="박물관">박물관</span>
-          <span class="cat-tag" data-cat="역사">역사</span>
-          <span class="cat-tag" data-cat="전통시장">전통시장</span>
-        </div>
+      <div class="place-card">
+        <img src="images/Seoul.jpg" alt="서울">
+        <div class="place-name">서울</div>
       </div>
-
-      <div class="cat-group">
-        <div class="cat-group-title">🌿 자연 · 힐링</div>
-        <div class="cat-tags">
-          <span class="cat-tag" data-cat="자연">자연</span>
-          <span class="cat-tag" data-cat="바다">바다</span>
-          <span class="cat-tag" data-cat="산·등산">산·등산</span>
-          <span class="cat-tag" data-cat="힐링">힐링</span>
-          <span class="cat-tag" data-cat="캠핑">캠핑</span>
-          <span class="cat-tag" data-cat="온천">온천</span>
-        </div>
+      <div class="place-card">
+        <img src="images/Jeonju.jpg" alt="전주">
+        <div class="place-name">전주</div>
       </div>
-
-      <div class="cat-group">
-        <div class="cat-group-title">🎡 액티비티</div>
-        <div class="cat-tags">
-          <span class="cat-tag" data-cat="놀이공원">놀이공원</span>
-          <span class="cat-tag" data-cat="체험">체험</span>
-          <span class="cat-tag" data-cat="레저스포츠">레저스포츠</span>
-          <span class="cat-tag" data-cat="드라이브">드라이브</span>
-        </div>
-      </div>
-
-      <div class="cat-group">
-        <div class="cat-group-title">💑 테마</div>
-        <div class="cat-tags">
-          <span class="cat-tag" data-cat="커플">커플</span>
-          <span class="cat-tag" data-cat="가족">가족</span>
-          <span class="cat-tag" data-cat="혼행">혼행</span>
-          <span class="cat-tag" data-cat="포토스팟">포토스팟</span>
-          <span class="cat-tag" data-cat="야경">야경</span>
-        </div>
-      </div>
-
     </div>
 
-    <div class="sidebar-footer">
-      <div class="selected-summary" id="selSummary" style="display:none;">
-        <span id="summaryRegion"></span> · <span id="summaryCats"></span>
-      </div>
-      <button class="btn-go" id="btnGo" disabled>선택 완료</button>
+    <div class="section-header">
+      <div class="section-title">카테고리 선택 (중복 선택 가능)</div>
     </div>
-  </aside>
+    <div class="category-grid">
+      <button class="cat-btn">문화</button>
+      <button class="cat-btn">관광</button>
+      <button class="cat-btn">힐링</button>
+      <button class="cat-btn">자연</button>
+      <button class="cat-btn">체험</button>
+      <button class="cat-btn">커플</button>
+      <button class="cat-btn">가족</button>
+      <button class="cat-btn">쇼핑</button>
+    </div>
 
-  <!-- 지도 영역 -->
-  <div class="map-wrap">
-    <div class="map-tooltip" id="mapTooltip" style="display:none;"></div>
-    <div id="kakaoMap"></div>
+    <div class="footer-area">
+      <button class="btn-complete" id="submitBtn">선택 완료</button>
+    </div>
 
-    <!-- 결과 패널 (나중에 AI 연동 시 사용) -->
-    <div class="result-panel" id="resultPanel">
-      <div class="result-header">
-        <button class="btn-back" id="btnBack">← 돌아가기</button>
+    <!-- 추천 결과 카드 -->
+    <div id="recommend-result" class="recommend-section" style="display: none;">
+      <div class="section-header">
+        <div class="section-title">🔮 이런 여행지는 어떠세요?</div>
+      </div>
+      <div class="recommend-grid" id="recommendGrid"></div>
+    </div>
+
+    <!-- ★ 코스 지도 패널 (태그 클릭 시 슬라이드 오픈) -->
+    <div id="course-panel">
+      <div class="course-panel-header">
         <div>
-          <h2 id="resultTitle"></h2>
-          <p id="resultSubtitle"></p>
+          <h3>📍 추천 여행 코스</h3>
+          <div id="course-title"></div>
         </div>
+        <button id="close-course-panel" title="닫기">✕</button>
       </div>
-      <div class="result-body" id="resultBody">
-        <!-- 추후 카드 렌더링 -->
-        <div class="coming-soon">
-          <div class="coming-icon">🗺️</div>
-          <h3>여행지 추천 준비 중</h3>
-          <p>선택하신 지역과 카테고리를 저장했어요.<br/>AI 추천 기능이 곧 추가될 예정이에요!</p>
-          <div class="saved-info" id="savedInfo"></div>
-        </div>
+      <div class="course-body">
+        <!-- 카카오맵 -->
+        <div id="course-map"></div>
+        <!-- 코스 목록 사이드바 -->
+        <div class="course-sidebar" id="course-sidebar"></div>
       </div>
     </div>
+
   </div>
 
-</div>
-
-<script src="js/domestic-travel.js"></script>
+  <script src="js/domestic-travel.js"></script>
 </body>
 </html>
