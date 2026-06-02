@@ -26,168 +26,168 @@ document.addEventListener('DOMContentLoaded', () => {
   // =====================================================
   const mockData = [
 
-    // ===== 부산 =====
-    {
-      location: "부산", categories: ["자연", "커플", "관광", "힐링"],
-      title: "미포철길",
-      desc: "푸른 바다를 바로 곁에 두고 걸을 수 있는 낭만적인 해안 산책로.",
-      img: "images/busan/미포철길.jpg",
-      coords: [35.1731, 129.1993]
-    },
-    {
-      location: "부산", categories: ["자연", "커플", "체험", "관광"],
-      title: "광안리 해수욕장",
-      desc: "광안리의 바다를 보며 시원하게 즐길 수 있는 곳.",
-      img: "images/busan/광안리.jpg",
-      coords: [35.1531, 129.1185]
-    },
-    {
-      location: "부산", categories: ["가족", "문화"],
-      title: "감천문화마을",
-      desc: "설치 미술 작품들이 독특한 경관을 이루는 곳.",
-      img: "images/busan/gan.jpg",
-      coords: [35.0975, 129.0100]
-    },
-    {
-      location: "부산", categories: ["가족", "문화", "관광", "힐링"],
-      title: "흰여울문화마을",
-      desc: "바로 옆으로 푸른 부산 바다가 펼쳐지는 바다 전망의 문화 공간.",
-      img: "images/busan/흰여울.jpg",
-      coords: [35.0760, 129.0197]
-    },
-    {
-      location: "부산", categories: ["가족", "문화", "힐링"],
-      title: "보수동 책방골목",
-      desc: "한국전쟁 시절 피난민들이 생계를 위해 책을 사고팔기 시작하면서 형성된 역사적인 골목.",
-      img: "images/busan/책방골목.jpg",
-      coords: [35.1040, 129.0274]
-    },
-    {
-      location: "부산", categories: ["자연", "문화", "체험"],
-      title: "범어사",
-      desc: "호젓한 대나무 숲길을 걸으며 고즈넉한 한국의 전통 불교문화를 체험하기에 좋은 곳.",
-      img: "images/busan/범어사.jpg",
-      coords: [35.2960, 129.0820]
-    },
-    {
-      location: "부산", categories: ["자연", "커플", "가족", "힐링"],
-      title: "오륙도 스카이워크",
-      desc: "투명한 유리 바닥 아래로 아찔한 바다와 부산의 상징인 오륙도를 가장 가까이서 감상.",
-      img: "images/busan/스카이워크.jpg",
-      coords: [35.0698, 129.1136]
-    },
-    {
-      location: "부산", categories: ["문화", "커플", "가족"],
-      title: "영화의 전당",
-      desc: "세계적인 영화제인 '부산국제영화제(BIFF)'의 전용관이자 부산이 '영화의 도시'임을 상징하는 복합영상문화공간.",
-      img: "images/busan/영화의 전당.jpg",
-      coords: [35.1689, 129.1305]
-    },
-    {
-      location: "부산", categories: ["문화", "가족"],
-      title: "임시수도기념관",
-      desc: "부산의 뼈아픈 역사와 피란민들의 삶을 보존하고 있는 공간.",
-      img: "images/busan/임시수도기념관.jpg",
-      coords: [35.1010, 129.0178]
-    },
-    {
-      location: "부산", categories: ["문화"],
-      title: "청자빌딩",
-      desc: "1918년에 지어진 옛 한성은행 부산지점 건물을 리모델링하여 탄생한 복합문화공간.",
-      img: "images/busan/청자빌딩.jpg",
-      coords: [35.1019, 129.0325]
-    },
-    {
-      location: "부산", categories: ["문화", "체험"],
-      title: "국립해양박물관",
-      desc: "바다와 관련된 모든 문화적 자산을 한눈에 볼 수 있는 곳.",
-      img: "images/busan/국립해양박물관.jpg",
-      coords: [35.0841, 129.0850]
-    },
-    {
-      location: "부산", categories: ["관광", "가족", "힐링"],
-      title: "해운대 블루라인파크",
-      desc: "바다를 바로 옆에 두고 달리는 '해변열차'와 공중 레일에서 프라이빗하게 경치를 즐기는 곳.",
-      img: "images/busan/블루라인파크.jpg",
-      coords: [35.1589, 129.1603]
-    },
-    {
-      location: "부산", categories: ["관광", "가족", "자연"],
-      title: "태종대유원지",
-      desc: "영도 남단에 위치한 부산의 대표적인 자연 명승지.",
-      img: "images/busan/태종대유원지.jpg",
-      coords: [35.0490, 129.0820]
-    },
-    {
-      location: "부산", categories: ["관광"],
-      title: "해동용궁사",
-      desc: "거친 해안 바위 위에 지어진 독특하고 아름다운 수상 법당.",
-      img: "images/busan/해동용궁사.jpg",
-      coords: [35.1891, 129.2249]
-    },
-    {
-      location: "부산", categories: ["관광", "체험", "힐링", "커플"],
-      title: "송도해상케이블카",
-      desc: "동쪽 송림공원에서부터 서쪽 암남공원까지 바다 위를 가로지르는 짜릿한 해상 케이블카.",
-      img: "images/busan/송도해상케이블카.jpg",
-      coords: [35.0867, 129.0102]
-    },
-    {
-      location: "부산", categories: ["힐링", "관광", "자연"],
-      title: "아홉산숲",
-      desc: "한 가문이 400년 동안 가꾸어 온 비밀스러운 숲으로, 웅장한 대나무 평전과 편백나무가 주는 압도적인 청량감을 느낄 수 있는 곳.",
-      img: "images/busan/아홉산숲.jpg",
-      coords: [35.2630, 129.2060]
-    },
-    {
-      location: "부산", categories: ["힐링", "관광", "체험", "커플"],
-      title: "화명수목원",
-      desc: "대천천 계곡을 따라 조성된 숲에서 다양한 식물들을 만나고, 피톤치드를 마시며 도심 속 자연을 만끽하는 휴식 공간.",
-      img: "images/busan/화명수목원.jpg",
-      coords: [35.2419, 128.9981]
-    },
-    {
-      location: "부산", categories: ["힐링", "체험", "커플"],
-      title: "스파랜드 센텀시티",
-      desc: "천연 온천수로 채워진 다채로운 테마의 찜질방과 노천탕에서 여행의 피로를 고급스럽고 편안하게 풀어주는 도심형 휴양 공간.",
-      img: "images/busan/스파랜드.jpg",
-      coords: [35.1686, 129.1316]
-    },
-    {
-      location: "부산", categories: ["힐링", "관광"],
-      title: "청사포 다릿돌전망대",
-      desc: "동해안의 수려한 해안 경관과 일출, 일몰을 감상하며 바다 한가운데 서 있는 듯한 몽환적인 평화로움을 선사하는 전망대.",
-      img: "images/busan/다릿돌전망대.jpg",
-      coords: [35.1725, 129.2050]
-    },
-    {
-      location: "부산", categories: ["쇼핑", "관광"],
-      title: "신세계백화점 센텀시티점",
-      desc: "세계 최대 규모로 기네스북에 등재된 복합 쇼핑몰로, 명품 브랜드부터 트렌디한 팝업스토어, 아이스링크까지 한 번에 즐길 수 있는 쇼핑의 메카.",
-      img: "images/busan/신세계백화점.jpg",
-      coords: [35.1693, 129.1302]
-    },
-    {
-      location: "부산", categories: ["쇼핑", "관광"],
-      title: "국제시장",
-      desc: "영화 배경으로도 유명한 부산의 대표 전통시장으로, 의류, 잡화, 기계 부품 등 '없는 것 빼고 다 있다'는 만물 시장 특유의 활기찬 매력을 가진 곳.",
-      img: "images/busan/국제시장.jpg",
-      coords: [35.0990, 129.0276]
-    },
-    {
-      location: "부산", categories: ["쇼핑", "관광", "힐링"],
-      title: "롯데프리미엄아울렛 동부산점",
-      desc: "그리스 산토리니를 모티브로 한 이국적인 건축물 안에서 다양한 브랜드를 합리적인 가격에 쇼핑하고, 탁 트인 등대 전망대도 즐길 수 있는 곳.",
-      img: "images/busan/롯데프리미엄아울렛.jpg",
-      coords: [35.1878, 129.2183]
-    },
-    {
-      location: "부산", categories: ["쇼핑", "관광"],
-      title: "BIFF광장 및 남포동 거리",
-      desc: "부산 극장가의 역사이자 최신 패션 브랜드 로드숍, 뷰티 매장이 밀집해 있으며, 씨앗호떡을 비롯한 풍성한 길거리 먹거리 쇼핑까지 즐길 수 있는 곳.",
-      img: "images/busan/BIFF광장.jpg",
-      coords: [35.0975, 129.0270]
-    },
+// ===== 부산 =====
+{
+  location: "부산", categories: ["자연", "커플", "관광", "힐링"],
+  title: "미포철길",
+  desc: "푸른 바다를 바로 곁에 두고 걸을 수 있는 낭만적인 해안 산책로.",
+  img: "images/busan/미포철길.jpg",
+  coords: [35.1731, 129.1993]
+},
+{
+  location: "부산", categories: ["자연", "커플", "체험", "관광"],
+  title: "광안리 해수욕장",
+  desc: "광안리의 바다를 보며 시원하게 즐길 수 있는 곳.",
+  img: "images/busan/광안리.jpg",
+  coords: [35.1531, 129.1185]
+},
+{
+  location: "부산", categories: ["가족", "문화"],
+  title: "감천문화마을",
+  desc: "설치 미술 작품들이 독특한 경관을 이루는 곳.",
+  img: "images/busan/gan.jpg",
+  coords: [35.0975, 129.0100]
+},
+{
+  location: "부산", categories: ["가족", "문화", "관광", "힐링"],
+  title: "흰여울문화마을",
+  desc: "바로 옆으로 푸른 부산 바다가 펼쳐지는 바다 전망의 문화 공간.",
+  img: "images/busan/흰여울.jpg",
+  coords: [35.0760, 129.0197]
+},
+{
+  location: "부산", categories: ["가족", "문화", "힐링"],
+  title: "보수동 책방골목",
+  desc: "한국전쟁 시절 피난민들이 생계를 위해 책을 사고팔기 시작하면서 형성된 역사적인 골목.",
+  img: "images/busan/책방골목.jpg",
+  coords: [35.1040, 129.0274]
+},
+{
+  location: "부산", categories: ["자연", "문화", "체험"],
+  title: "범어사",
+  desc: "호젓한 대나무 숲길을 걸으며 고즈넉한 한국의 전통 불교문화를 체험하기에 좋은 곳.",
+  img: "images/busan/범어사.jpg",
+  coords: [35.2960, 129.0820]
+},
+{
+  location: "부산", categories: ["자연", "커플", "가족", "힐링"],
+  title: "오륙도 스카이워크",
+  desc: "투명한 유리 바닥 아래로 아찔한 바다와 부산의 상징인 오륙도를 가장 가까이서 감상.",
+  img: "images/busan/스카이워크.jpg",
+  coords: [35.0698, 129.1136]
+},
+{
+  location: "부산", categories: ["문화", "커플", "가족"],
+  title: "영화의 전당",
+  desc: "세계적인 영화제인 '부산국제영화제(BIFF)'의 전용관이자 부산이 '영화의 도시'임을 상징하는 복합영상문화공간.",
+  img: "images/busan/영화의 전당.jpg",
+  coords: [35.1689, 129.1305]
+},
+{
+  location: "부산", categories: ["문화", "가족"],
+  title: "임시수도기념관",
+  desc: "부산의 뼈아픈 역사와 피란민들의 삶을 보존하고 있는 공간.",
+  img: "images/busan/임시수도기념관.jpg",
+  coords: [35.1010, 129.0178]
+},
+{
+  location: "부산", categories: ["문화"],
+  title: "청자빌딩",
+  desc: "1918년에 지어진 옛 한성은행 부산지점 건물을 리모델링하여 탄생한 복합문화공간.",
+  img: "images/busan/청자빌딩.jpg",
+  coords: [35.1019, 129.0325]
+},
+{
+  location: "부산", categories: ["문화", "체험"],
+  title: "국립해양박물관",
+  desc: "바다와 관련된 모든 문화적 자산을 한눈에 볼 수 있는 곳.",
+  img: "images/busan/국립해양박물관.jpg",
+  coords: [35.0841, 129.0850]
+},
+{
+  location: "부산", categories: ["관광", "가족", "힐링"],
+  title: "해운대 블루라인파크",
+  desc: "바다를 바로 옆에 두고 달리는 '해변열차'와 공중 레일에서 프라이빗하게 경치를 즐기는 곳.",
+  img: "images/busan/블루라인파크.jpg",
+  coords: [35.1589, 129.1603]
+},
+{
+  location: "부산", categories: ["관광", "가족", "자연"],
+  title: "태종대유원지",
+  desc: "영도 남단에 위치한 부산의 대표적인 자연 명승지.",
+  img: "images/busan/태종대유원지.jpg",
+  coords: [35.0490, 129.0820]
+},
+{
+  location: "부산", categories: ["관광"],
+  title: "해동용궁사",
+  desc: "거친 해안 바위 위에 지어진 독특하고 아름다운 수상 법당.",
+  img: "images/busan/해동용궁사.jpg",
+  coords: [35.1891, 129.2249]
+},
+{
+  location: "부산", categories: ["관광", "체험", "힐링", "커플"],
+  title: "송도해상케이블카",
+  desc: "동쪽 송림공원에서부터 서쪽 암남공원까지 바다 위를 가로지르는 짜릿한 해상 케이블카.",
+  img: "images/busan/송도해상케이블카.jpg",
+  coords: [35.0867, 129.0102]
+},
+{
+  location: "부산", categories: ["힐링", "관광", "자연"],
+  title: "아홉산숲",
+  desc: "한 가문이 400년 동안 가꾸어 온 비밀스러운 숲으로, 웅장한 대나무 평전과 편백나무가 주는 압도적인 청량감을 느낄 수 있는 곳.",
+  img: "images/busan/아홉산숲.jpg",
+  coords: [35.2630, 129.2060]
+},
+{
+  location: "부산", categories: ["힐링", "관광", "체험", "커플"],
+  title: "화명수목원",
+  desc: "대천천 계곡을 따라 조성된 숲에서 다양한 식물들을 만나고, 피톤치드를 마시며 도심 속 자연을 만끽하는 휴식 공간.",
+  img: "images/busan/화명수목원.jpg",
+  coords: [35.2419, 128.9981]
+},
+{
+  location: "부산", categories: ["힐링", "체험", "커플"],
+  title: "스파랜드 센텀시티",
+  desc: "천연 온천수로 채워진 다채로운 테마의 찜질방과 노천탕에서 여행의 피로를 고급스럽고 편안하게 풀어주는 도심형 휴양 공간.",
+  img: "images/busan/스파랜드.jpg",
+  coords: [35.1686, 129.1316]
+},
+{
+  location: "부산", categories: ["힐링", "관광"],
+  title: "청사포 다릿돌전망대",
+  desc: "동해안의 수려한 해안 경관과 일출, 일몰을 감상하며 바다 한가운데 서 있는 듯한 몽환적인 평화로움을 선사하는 전망대.",
+  img: "images/busan/다릿돌전망대.jpg",
+  coords: [35.1725, 129.2050]
+},
+{
+  location: "부산", categories: ["쇼핑", "관광"],
+  title: "신세계백화점 센텀시티점",
+  desc: "세계 최대 규모로 기네스북에 등재된 복합 쇼핑몰로, 명품 브랜드부터 트렌디한 팝업스토어, 아이스링크까지 한 번에 즐길 수 있는 쇼핑의 메카.",
+  img: "images/busan/신세계백화점.jpg",
+  coords: [35.1693, 129.1302]
+},
+{
+  location: "부산", categories: ["쇼핑", "관광"],
+  title: "국제시장",
+  desc: "영화 배경으로도 유명한 부산의 대표 전통시장으로, 의류, 잡화, 기계 부품 등 '없는 것 빼고 다 있다'는 만물 시장 특유의 활기찬 매력을 가진 곳.",
+  img: "images/busan/국제시장.jpg",
+  coords: [35.0990, 129.0276]
+},
+{
+  location: "부산", categories: ["쇼핑", "관광", "힐링"],
+  title: "롯데프리미엄아울렛 동부산점",
+  desc: "그리스 산토리니를 모티브로 한 이국적인 건축물 안에서 다양한 브랜드를 합리적인 가격에 쇼핑하고, 탁 트인 등대 전망대도 즐길 수 있는 곳.",
+  img: "images/busan/롯데프리미엄아울렛.jpg",
+  coords: [35.1878, 129.2183]
+},
+{
+  location: "부산", categories: ["쇼핑", "관광"],
+  title: "BIFF광장 및 남포동 거리",
+  desc: "부산 극장가의 역사이자 최신 패션 브랜드 로드숍, 뷰티 매장이 밀집해 있으며, 씨앗호떡을 비롯한 풍성한 길거리 먹거리 쇼핑까지 즐길 수 있는 곳.",
+  img: "images/busan/BIFF광장.jpg",
+  coords: [35.0975, 129.0270]
+},
 
     // ===== 광주 =====
     {
