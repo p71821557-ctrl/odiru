@@ -558,6 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
     "img": "images/seoul/성수동연무장길.jpg",
     "coords": [37.544, 127.054]
   },
+  // ===== 전주 =====
   {
     "location": "전주",
     "categories": ["문화", "관광","커플","가족"],
