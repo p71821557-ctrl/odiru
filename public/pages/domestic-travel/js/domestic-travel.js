@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
       location: "광주", categories: ["관광", "힐링", "가족"],
       title: "무등산 양떼목장",
       desc: "푸른 초원에서 귀여운 양들과 교감하며 도심 속 힐링을 즐길 수 있는 곳입니다.",
-      img: "images/gwangju/무등산.jpg",
+      img: "images/gwangju/양떼목장.jpg",
       coords: [35.1220, 126.9990]
     },
     {
