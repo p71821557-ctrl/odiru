@@ -1,3 +1,6 @@
+/* =====================================================
+   RESET & BASE
+   ===================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +13,9 @@ body {
   color: #222;
 }
 
-/* ==================== 헤더 ==================== */
+/* =====================================================
+   HEADER
+   ===================================================== */
 .header {
   width: 100%;
   height: 80px;
@@ -36,7 +41,7 @@ body {
   text-decoration: none;
   color: #333;
   font-weight: 700;
-  transition: 0.3s;
+  transition: color 0.3s;
 }
 .nav a:hover { color: #2979ff; }
 
@@ -50,7 +55,9 @@ body {
   font-weight: bold;
 }
 
-/* ==================== 배너 ==================== */
+/* =====================================================
+   HERO BANNER
+   ===================================================== */
 .hero-banner {
   width: 100%;
   height: 400px;
@@ -67,7 +74,9 @@ body {
 .hero-content h1 { font-size: 3.2rem; margin-bottom: 15px; }
 .hero-content p  { font-size: 1.1rem; opacity: 0.9; line-height: 1.5; }
 
-/* ==================== 콘텐츠 ==================== */
+/* =====================================================
+   CONTENT
+   ===================================================== */
 .content-container {
   max-width: 1000px;
   margin: 60px auto;
@@ -81,7 +90,9 @@ body {
 }
 .section-title { font-size: 1.5rem; font-weight: bold; }
 
-/* ==================== 여행지 그리드 ==================== */
+/* =====================================================
+   TRAVEL GRID (여행지 선택)
+   ===================================================== */
 .travel-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -93,7 +104,7 @@ body {
   overflow: hidden;
   border: 3px solid #eee;
   cursor: pointer;
-  transition: 0.3s;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 .place-card img { width: 100%; height: 140px; object-fit: cover; }
 .place-name { padding: 15px; text-align: center; font-weight: bold; }
@@ -103,7 +114,9 @@ body {
   box-shadow: 0 10px 20px rgba(0,162,237,0.15);
 }
 
-/* ==================== 카테고리 ==================== */
+/* =====================================================
+   CATEGORY GRID
+   ===================================================== */
 .category-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -116,11 +129,13 @@ body {
   background: #f1f3f5;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 .cat-btn.selected { background-color: #00a2ed; color: white; }
 
-/* ==================== 완료 버튼 ==================== */
+/* =====================================================
+   SUBMIT BUTTON
+   ===================================================== */
 .footer-area { text-align: center; margin: 80px 0; }
 .btn-complete {
   background: #00a2ed;
@@ -131,9 +146,13 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.2s;
 }
+.btn-complete:hover { background: #0090d4; }
 
-/* ==================== 추천 결과 카드 ==================== */
+/* =====================================================
+   RECOMMEND RESULT CARDS
+   ===================================================== */
 .recommend-section {
   margin-top: 50px;
   animation: fadeInResult 0.6s ease-out;
@@ -177,7 +196,7 @@ body {
   height: 4.5em;
 }
 
-/* 태그 — 클릭 가능 */
+/* 태그 */
 .recommend-tags { display: flex; flex-wrap: wrap; gap: 4px; }
 .recommend-tags .tag {
   display: inline-block;
@@ -190,9 +209,11 @@ body {
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
-.recommend-tags .tag:hover {
+.recommend-tags .tag:hover  { background: #2979ff; color: white; }
+.recommend-tags .tag.tag-active {
   background: #2979ff;
   color: white;
+  box-shadow: 0 2px 8px rgba(41,121,255,0.35);
 }
 
 @keyframes fadeInResult {
@@ -200,10 +221,11 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ==================== 코스 패널 (전체 영역) ==================== */
-/*  display:flex 로 지도(왼쪽) + 사이드바(오른쪽) 배치           */
+/* =====================================================
+   COURSE PANEL
+   ===================================================== */
 #course-panel {
-  display: none;           /* JS에서 'flex'로 변경 */
+  display: none;
   flex-direction: column;
   margin-top: 60px;
   border-radius: 20px;
@@ -227,15 +249,9 @@ body {
   background: #00a2ed;
   color: white;
 }
-.course-panel-header h3 {
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-#course-title {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  margin-top: 2px;
-}
+.course-panel-header h3 { font-size: 1.1rem; font-weight: bold; }
+#course-title { font-size: 0.95rem; opacity: 0.9; margin-top: 2px; }
+
 #close-course-panel {
   background: rgba(255,255,255,0.25);
   border: none;
@@ -252,19 +268,17 @@ body {
 }
 #close-course-panel:hover { background: rgba(255,255,255,0.45); }
 
-/* 지도 + 사이드바 행 */
+/* 지도 + 사이드바 */
 .course-body {
   display: flex;
   height: 560px;
 }
 
-/* 카카오 지도 */
 #course-map {
   flex: 1;
   min-width: 0;
 }
 
-/* 코스 사이드바 */
 .course-sidebar {
   width: 300px;
   background: white;
@@ -274,12 +288,82 @@ body {
   flex-shrink: 0;
 }
 
-/* 코스 아이템 */
+/* =====================================================
+   TRANSPORT SELECTOR
+   ===================================================== */
+.transport-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #eee;
+}
+.transport-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  background: #fafafa;
+  font-size: 0.72rem;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.transport-btn span:first-child { font-size: 1.1rem; }
+.transport-btn.active {
+  border-color: #00a2ed;
+  color: #00a2ed;
+  background: #eef7fd;
+}
+
+/* 경로 계산 중 로딩 */
+.route-loading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #888;
+  margin-bottom: 4px;
+  padding: 6px 10px;
+  background: #f5f7fb;
+  border-radius: 8px;
+}
+.route-loading .spinner {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #ddd;
+  border-top-color: #00a2ed;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* =====================================================
+   COURSE ITEMS
+   ===================================================== */
 .course-item {
   display: flex;
   gap: 12px;
   padding-bottom: 6px;
+  cursor: grab;
 }
+.course-item.dragging  { opacity: 0.5; }
+.course-item.drag-over { background: #eef7fd; border-radius: 8px; }
+
+.drag-handle {
+  font-size: 1rem;
+  color: #ccc;
+  cursor: grab;
+  padding-top: 4px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
 .course-step {
   display: flex;
   flex-direction: column;
@@ -297,7 +381,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
 }
 .course-line {
   width: 2px;
@@ -306,7 +389,8 @@ body {
   background: #d0e8ff;
   margin: 4px 0;
 }
-.course-detail { flex: 1; padding-bottom: 12px; }
+
+.course-detail { flex: 1; padding-bottom: 12px; position: relative; }
 .course-place-name {
   font-weight: bold;
   font-size: 0.95rem;
@@ -318,18 +402,60 @@ body {
   color: #2979ff;
   margin-bottom: 6px;
 }
+
+.course-remove-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: 1px solid #eee;
+  color: #aaa;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.65rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.course-remove-btn:hover { background: #ff5252; color: white; border-color: #ff5252; }
+
+/* =====================================================
+   ROUTE INFO (구간 정보)
+   ===================================================== */
 .course-route-info {
   display: flex;
-  justify-content: space-between;
-  background: #f5f7fb;
-  border-radius: 8px;
-  padding: 7px 10px;
-  font-size: 0.78rem;
-  color: #555;
+  align-items: center;
+  gap: 6px;
+  border-left: 3px solid #00a2ed;
+  border-radius: 0 8px 8px 0;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  color: #444;
   margin-bottom: 4px;
+  background: #f0f7ff;
+}
+.route-icon  { font-size: 0.85rem; }
+.route-dist  { font-weight: 700; color: #00a2ed; }
+.route-sep   { color: #bbb; }
+.route-time  { color: #555; }
+
+/* 추천 배지 (도보 vs 버스 추천) */
+.route-recommend-badge {
+  font-size: 0.68rem;
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-left: auto;
 }
 
-/* ==================== 카카오맵 커스텀 핀 ==================== */
+/* =====================================================
+   KAKAO MAP 커스텀 핀 & 레이블
+   ===================================================== */
 .map-pin {
   display: flex;
   flex-direction: column;
@@ -363,9 +489,7 @@ body {
   white-space: nowrap;
 }
 
-/* 구간 거리·시간 레이블 */
 .map-route-label {
-  background: rgba(0,162,237,0.9);
   color: white;
   font-size: 0.72rem;
   font-weight: bold;
@@ -375,43 +499,21 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-/* ==================== 반응형 ==================== */
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
 @media (max-width: 950px) {
   .recommend-grid { grid-template-columns: repeat(2, 1fr); }
-  .course-body { flex-direction: column; height: auto; }
-  #course-map { height: 300px; }
+  .course-body    { flex-direction: column; height: auto; }
+  #course-map     { height: 300px; }
   .course-sidebar { width: 100%; border-left: none; border-top: 1px solid #eee; }
   #course-panel.open { max-height: 1000px; }
 }
 @media (max-width: 768px) {
-  .header { padding: 0 20px; }
+  .header        { padding: 0 20px; }
   .travel-grid,
   .category-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 550px) {
   .recommend-grid { grid-template-columns: 1fr; }
 }
-/* ==================== 태그 활성 상태 (카드 클릭 시) ==================== */
-.recommend-tags .tag.tag-active {
-  background: #2979ff;
-  color: white;
-  box-shadow: 0 2px 8px rgba(41, 121, 255, 0.35);
-}
-
-/* ==================== 거리 표시 개선 ==================== */
-.course-route-info {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: #f0f7ff;
-  border-left: 3px solid #00a2ed;
-  border-radius: 0 8px 8px 0;
-  padding: 6px 12px;
-  font-size: 0.8rem;
-  color: #444;
-  margin-bottom: 4px;
-}
-.route-icon  { font-size: 0.85rem; }
-.route-dist  { font-weight: 700; color: #00a2ed; }
-.route-sep   { color: #bbb; }
-.route-time  { color: #555; }
