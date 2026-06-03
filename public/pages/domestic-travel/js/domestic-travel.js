@@ -7,20 +7,11 @@ const KAKAO_REST_KEY = '8c7c498db86403ba673ecdce2316c007';
 
 /* =====================================================
    교통수단 설정
-   - walk  : 카카오 Directions 도보 API
    - car   : 카카오 Directions 자동차 API
-   - transit: 카카오 Directions 대중교통 API (버스/지하철 혼합)
    ===================================================== */
 const TRANSPORT_CONFIG = {
-  walk:    { icon: '🚶', label: '도보',     color: '#4caf50', apiMode: 'walk'    },
   car:     { icon: '🚗', label: '자동차',   color: '#2196f3', apiMode: 'car'     },
-  transit: { icon: '🚌', label: '대중교통', color: '#ff9800', apiMode: 'transit' },
 };
-
-/* 도보로 충분히 갈 수 있는 거리 기준 (km) — 이 이하면 도보 자동 추천 */
-const WALK_THRESHOLD_KM = 1.5;
-/* 버스보다 도보가 빠를 것으로 보는 시간 기준 (분) */
-const WALK_VS_TRANSIT_MIN = 20;
 
 /* =====================================================
    관광지 데이터
@@ -66,8 +57,7 @@ const mockData = [
   { location: '광주', categories: ['힐링','관광','자연','커플'],     title: '풍암저수지 및 풍암호수공원', desc: '도심 속 잔잔한 호수를 따라 잘 조성된 장미원과 산책로를 걸으며 여유를 즐기는 쉼터.',                                                                        img: 'images/gwangju/풍암저수지.jpg',       coords: [35.1225, 126.8700] },
   { location: '광주', categories: ['힐링','자연'],                  title: '광주 시민의 숲',       desc: '첨단지구 영산강 변에 위치하여 울창한 야외 수목들과 잘 가꾸어진 잔디밭이 어우러진 곳.',                                                                           img: 'images/gwangju/시민의숲.jpg',         coords: [35.1920, 126.8380] },
   { location: '광주', categories: ['체험','관광','가족'],            title: '광주기아챔피언스필드',  desc: '국내 최고 수준의 야구장 시설을 갖춘 곳.',                                                                                                                     img: 'images/gwangju/기아챔피언스필드.jpg', coords: [35.1680, 126.8892] },
-  { location: '광주', categories: ['체험','문화','가족'],            title: '빛고을공예창작촌',      desc: '전문 공예인들과 함께 전통 공예품을 직접 손으로 빚고 만들어볼 수 있는 문화 체험 공간.',                                                                           img: 'images/gwangju/빛고을공예창작촌.jpg', coords: [35.1263, 126.9224] },
-  { location: '광주', categories: ['체험','관광'],                  title: '김치타운 (광주김치박물관)', desc: '광주의 대표 브랜드인 남도 김치의 역사와 문화를 배우고 직접 김치를 담그는 체험장.',                                                                          img: 'images/gwangju/김치타운.jpg',         coords: [35.1595, 126.8310] },
+  { location: '광주', categories: ['체험','문화','가족'],            title: '빛고을공예창작촌',      desc: '전문 공예인들과 함께 전통 공예품을 직접 손으로 빚고 만들어볼 수 있는 문화 체험 공간.',                                                                           img: 'images/gwangju/빛고을공예창작촌.jpg', coords: [35.0710, 126.8900] },
   { location: '광주', categories: ['체험','문화'],                  title: '국립광주과학관',        desc: '빛, 예술, 과학을 아우르는 독창적인 전시물과 함께 실험·실습 프로그램을 제공하는 곳.',                                                                             img: 'images/gwangju/국립광주과학관.jpg',   coords: [35.1700, 126.8890] },
   { location: '광주', categories: ['체험','힐링','자연'],            title: '무등산 국립공원 평촌명품마을', desc: '무등산 자락의 청정 자연 속에서 전통 두부 만들기, 도예 체험, 생태 숲 탐방 등을 경험하는 마을.', img: 'images/gwangju/평촌마을.jpg',         coords: [35.1050, 127.0110] },
   { location: '광주', categories: ['쇼핑','관광'],                  title: '롯데아울렛 수완점',     desc: '호수공원 주변에 위치하여 수려한 경관을 바라보며 쇼핑을 즐길 수 있는 대규모 아울렛.',                                                                             img: 'images/gwangju/롯데아울렛수완.jpg',   coords: [35.1870, 126.8341] },
@@ -93,7 +83,7 @@ const mockData = [
   { location: '서울', categories: ['자연','힐링'],                  title: '남산 둘레길',          desc: '남산의 생태계를 보존하며 고도 등고선을 따라 조성된 완만한 보행로.',                                                                                               img: 'images/seoul/남산둘레길.jpg',         coords: [37.5500, 126.9900] },
   { location: '서울', categories: ['자연','관광'],                  title: '북한산 국립공원',       desc: '거대한 화강암봉과 수려한 계곡으로 이루어진 세계적으로 드문 도심 속 국립공원.',                                                                                   img: 'images/seoul/북한산.jpg',             coords: [37.6584, 126.9782] },
   { location: '서울', categories: ['자연','커플'],                  title: '월드컵공원 하늘공원',   desc: '과거 난지도 쓰레기 매립지를 생태 공원으로 복원한 환경 재생의 대표적 사례.',                                                                                     img: 'images/seoul/하늘공원.jpg',           coords: [37.5678, 126.8854] },
-  { location: '서울', categories: ['자연','관광','커플'],            title: '청계천 생태 산책로',    desc: '고가도로를 철거하고 도심 한가운데를 가로지르도록 복원된 인공 하천.',                                                                                             img: 'images/seoul/청계천.jpg',             coords: [37.5691, 126.9787] },
+  { location: '서울', categories: ['자연','관광','커플'],            title: '청계천 생태 산책로',    desc: '고가도로를 필거하고 도심 한가운데를 가로지르도록 복원된 인공 하천.',                                                                                             img: 'images/seoul/청계천.jpg',             coords: [37.5691, 126.9787] },
   { location: '서울', categories: ['체험','문화'],                  title: '국립항공박물관',        desc: '항공 산업의 역사와 기술을 전시하는 국립 시설로, 조종 시뮬레이터 체험이 가능한 곳.',                                                                              img: 'images/seoul/국립항공박물관.jpg',     coords: [37.5510, 126.8010] },
   { location: '서울', categories: ['체험','가족'],                  title: '코엑스 아쿠아리움',     desc: '수백 종의 해양 생물을 테마별 구역으로 나누어 전시한 대형 실내 수족관.',                                                                                           img: 'images/seoul/코엑스아쿠아리움.jpg',   coords: [37.5131, 127.0588] },
   { location: '서울', categories: ['체험','문화'],                  title: '북촌전통공방',         desc: '전통 한옥 구역 내 조성된 공예 체험 시설로 매듭, 천연 염색 등 전통 기술 실습 프로그램을 운영.',                                                                   img: 'images/seoul/북촌공방.jpg',           coords: [37.5820, 126.9850] },
@@ -112,8 +102,7 @@ const mockData = [
   { location: '전주', categories: ['문화','힐링','커플'],            title: '전주향교',             desc: '조선시대 지방 양반들의 교육기관으로, 수백 년 된 거대한 은행나무들이 고즈넉한 한옥 마당을 채우고 있는 곳.',                                                      img: 'images/jeonju/전주향교.jpg',          coords: [35.8122, 127.1565] },
   { location: '전주', categories: ['문화','체험'],                  title: '국립무형유산원',        desc: '무형문화재를 체계적으로 보존하고 전승하는 복합문화공간으로, 전통 공예품 전시와 수준 높은 판소리 공연을 무료로 관람하는 곳.',                                     img: 'images/jeonju/국립무형유산원.jpg',    coords: [35.8100, 127.1550] },
   { location: '전주', categories: ['문화','관광'],                  title: '국립전주박물관',        desc: '조선 전주이씨의 발상지이자 호남 문화의 중심이었던 전북 지역의 역사 유물을 한눈에 살펴볼 수 있는 곳.',                                                            img: 'images/jeonju/국립전주박물관.jpg',    coords: [35.8140, 127.0980] },
-  { location: '전주', categories: ['문화','관광','가족'],            title: '자만벽화마을',         desc: '한옥마을이 내려다보이는 가파른 산동네 골목길을 따라 아기자기하고 화려한 벽화들이 그려진 곳.',                                                                    img: 'images/jeonju/자만벽화마을.jpg',      coords: [35.8160, 127.1570] },
-  { location: '전주', categories: ['문화','힐링','가족','커플'],     title: '서학동예술마을',        desc: '옛 서학동 법원 인근 골목에 예술인들이 모여 형성한 마을로, 조용한 골목을 걸으며 공방과 갤러리를 구경하기 좋은 곳.',                                               img: 'images/jeonju/서학동예술마을.jpg',    coords: [35.8100, 127.1470] },
+  { location: '전주', categories: ['문화','관광','가족'],            title: '자만벽화마을',         desc: '한옥마을이 내려다보이는 가파른 산동네 골목마다 아기자기하고 화려한 벽화들이 그려진 감성 마을.',                                                                 img: 'images/jeonju/자만벽화마을.jpg',      coords: [35.8140, 127.1580] },
   { location: '전주', categories: ['힐링','관광','자연','커플'],     title: '덕진공원',             desc: '전주의 허파 역할을 하는 곳으로, 여름이 되면 거대한 호수를 가득 채우는 붉은 연꽃의 향연을 감상할 수 있는 명소.',                                                 img: 'images/jeonju/덕진공원.jpg',          coords: [35.8475, 127.1215] },
   { location: '전주', categories: ['힐링','관광','자연'],            title: '전주수목원',           desc: '사계절 다채로운 야생화와 울창한 유리온실, 인스타 포토존으로 유명한 습지원 장미원 풍경 속에서 산림욕을 즐기는 곳.',                                               img: 'images/jeonju/전주수목원.jpg',        coords: [35.8710, 127.0600] },
   { location: '전주', categories: ['힐링','관광','자연','가족'],     title: '완산칠봉 꽃동산',       desc: '봄이 되면 온 산이 겹벚꽃과 철쭉으로 뒤덮여 붉은 꽃 파도를 이루는 힐링 코스.',                                                                                  img: 'images/jeonju/완산칠봉.jpg',          coords: [35.8080, 127.1400] },
@@ -131,7 +120,7 @@ const mockData = [
   { location: '전주', categories: ['쇼핑','문화'],                  title: '전주남부시장 청년몰',   desc: '전통시장 2층 유휴 공간을 젊은 사장들의 아이디어로 채운 핸드메이드 소품, 독특한 액세서리, 레트로 굿즈 문화 마켓.',                                                  img: 'images/jeonju/청년몰.jpg',            coords: [35.8125, 127.1485] },
   { location: '전주', categories: ['쇼핑','관광'],                  title: '한옥마을 공방 및 기념품 거리', desc: '태조로와 은행로를 따라 길게 이어진 쇼핑 거리로, 전주 한지 공예품, 전통 부채, 수제 도장 등 로컬 색이 짙은 기념품을 구매할 수 있는 곳.',                     img: 'images/jeonju/한옥마을쇼핑.jpg',      coords: [35.8140, 127.1520] },
   { location: '전주', categories: ['쇼핑','문화'],                  title: '객리단길 소품숍 골목',  desc: '트렌디한 카페와 맛집들이 모여 있는 다가동 객사길 구석구석에 위치한 개성 있는 인테리어 소품, 빈티지 의류 편집숍들이 밀집한 거리.',                                  img: 'images/jeonju/객리단길소품숍.jpg',    coords: [35.8180, 127.1430] },
-  { location: '전주', categories: ['쇼핑','관광'],                  title: '롯데백화점 전주점',     desc: '전주 서신동에 위치한 전북 지역 최대 규모의 백화점으로, 국내외 유명 패션 브랜드와 뷰티 매장, 대형 식품관과 영화관이 한데 모여 있는 곳.',                            img: 'images/jeonju/롯데백화점전주.jpg',    coords: [35.8360, 127.1260] },
+  { location: '전주', categories: ['쇼핑','관광'],                  title: '롯데백화점 전주점',     desc: '전주 서신동에 위치한 전북 지역 최대 규모의 백화점으로, 국내외 유명 패션 브랜드와 뷰티 매장, 대형 식품관과 영화관이 한데 모인 곳.',                            img: 'images/jeonju/롯데백화점전주.jpg',    coords: [35.8360, 127.1260] },
   { location: '전주', categories: ['쇼핑','관광'],                  title: '전주 모래내시장',       desc: '전주 시내 중심에 위치한 전통 종합 시장으로, 신선한 로컬 농수산물과 옛날 방식 그대로 구워내는 과자류 등 정겨운 시골 장터의 매력이 가득한 곳.',                     img: 'images/jeonju/모래내시장.jpg',        coords: [35.8330, 127.1450] },
   { location: '전주', categories: ['커플','관광'],                  title: '전주남부시장 야시장',   desc: '금요일과 토요일 밤이 되면 화려한 조명 아래 맛있는 길거리 음식들과 청년몰 소품들이 가득해지는 마켓.',                                                               img: 'images/jeonju/남부야시장.jpg',        coords: [35.8125, 127.1485] },
 ];
@@ -284,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* =====================================================
      카카오 Directions API 호출
-     - mode: 'WALKING' | 'TRANSIT' | 'CAR'
+     - mode: 'CAR'
      - 반환: { distanceM, durationSec, path: [[lat,lng], ...] }
      ===================================================== */
   async function fetchRoute(origin, destination, mode) {
@@ -292,23 +281,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const ox = origin[1],      oy = origin[0];
     const dx = destination[1], dy = destination[0];
 
-    if (mode === 'TRANSIT') {
-      /* 대중교통 경로: Kakao Mobility 대중교통 경로 API */
-      const url = `https://apis-navi.kakaomobility.com/v1/directions?origin=${ox},${oy}&destination=${dx},${dy}&priority=RECOMMEND&car_fuel=GASOLINE&car_hipass=false&alternatives=false&road_details=false`;
-      /* 대중교통은 별도 엔드포인트 없이 directions로 통일,
-         실제로는 대중교통 전용 API(kakaomap mobility transit)가 필요하나
-         REST API 키 하나로 접근 가능한 일반 경로를 사용하고
-         내부에서 도보/자동차 비교로 대중교통 효율 판단 */
-      return await callDirectionsAPI(ox, oy, dx, dy, 'CAR');
-    }
     return await callDirectionsAPI(ox, oy, dx, dy, mode);
   }
 
   async function callDirectionsAPI(ox, oy, dx, dy, mode) {
     try {
-      const endpoint = mode === 'WALKING'
-        ? `https://apis-navi.kakaomobility.com/v1/directions?origin=${ox},${oy}&destination=${dx},${dy}&priority=DISTANCE&road_details=false`
-        : `https://apis-navi.kakaomobility.com/v1/directions?origin=${ox},${oy}&destination=${dx},${dy}&priority=RECOMMEND&road_details=false`;
+      const endpoint = `https://apis-navi.kakaomobility.com/v1/directions?origin=${ox},${oy}&destination=${dx},${dy}&priority=RECOMMEND&car_fuel=GASOLINE&car_hipass=false&alternatives=false&road_details=false`;
 
       const res  = await fetch(endpoint, {
         headers: { Authorization: `KakaoAK ${KAKAO_REST_KEY}` },
@@ -343,20 +321,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =====================================================
-     도보 vs 대중교통 효율 비교
-     - 직선거리가 WALK_THRESHOLD_KM 이하이거나
-       도보 예상시간이 WALK_VS_TRANSIT_MIN 이하이면 도보 추천
-     ===================================================== */
-  function recommendTransport(origin, dest) {
-    const dist = getDistanceKm(origin, dest);
-    if (dist <= WALK_THRESHOLD_KM) return 'walk';
-    /* 도보 예상시간 (분): 직선거리 / 도보속도(4km/h) */
-    const walkMin = dist / 4 * 60;
-    if (walkMin <= WALK_VS_TRANSIT_MIN) return 'walk';
-    return 'transit';
-  }
-
-  /* =====================================================
      시간 문자열 포맷
      ===================================================== */
   function formatDuration(seconds) {
@@ -388,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ? `📍 ${places[0].title}`
       : `총 ${places.length}곳 · 약 ${totalKm.toFixed(1)}km`;
 
-    /* 교통수단 선택 버튼 */
+    /* 교통수단 선택 버튼 (자동차만 표시) */
     const transportHtml = `
       <div class="transport-selector">
         ${Object.entries(TRANSPORT_CONFIG).map(([key, c]) => `
@@ -445,58 +409,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const cfg          = TRANSPORT_CONFIG[currentTransport];
     const straightDist = getDistanceKm(from.coords, to.coords);
 
-    /* 대중교통 선택 시 효율 비교로 실제 추천 수단 결정 */
-    let effectiveMode = currentTransport; // 'walk' | 'car' | 'transit'
-    let isAutoRecommended = false;
-
-    if (currentTransport === 'transit') {
-      const recommended = recommendTransport(from.coords, to.coords);
-      if (recommended === 'walk') {
-        effectiveMode    = 'walk';
-        isAutoRecommended = true;
-      }
-    }
-
-    /* API 모드 변환 */
-    const apiMode = effectiveMode === 'walk' ? 'WALKING'
-                  : effectiveMode === 'car'  ? 'CAR'
-                  : 'TRANSIT';
-
+    const apiMode = 'CAR';
     const result = await fetchRoute(from.coords, to.coords, apiMode);
 
     if (!slot.isConnected) return; // 사용자가 다른 선택을 한 경우 무시
 
-    const effectiveCfg = TRANSPORT_CONFIG[effectiveMode] || cfg;
     let distStr, timeStr;
 
     if (result) {
       distStr = formatDistance(result.distanceM);
       timeStr = formatDuration(result.durationSec);
     } else {
-      /* API 실패 시 직선거리 기반 예측 */
-      const speeds = { walk: 4, car: 40, transit: 25 };
-      const speed  = speeds[effectiveMode] || 25;
+      /* API 실패 시 직선거리 기반 예측 (자동차 평균 40km/h) */
+      const speed  = 40;
       distStr = `약 ${straightDist.toFixed(1)}km`;
       timeStr = formatDuration(straightDist / speed * 3600);
     }
 
-    const badgeHtml = isAutoRecommended
-      ? `<span class="route-recommend-badge">🚶 도보 추천</span>`
-      : '';
-
     slot.outerHTML = `
-      <div class="course-route-info" style="border-left-color:${effectiveCfg.color}">
-        <span class="route-icon">${effectiveCfg.icon}</span>
+      <div class="course-route-info" style="border-left-color:${cfg.color}">
+        <span class="route-icon">${cfg.icon}</span>
         <span class="route-dist">${distStr}</span>
         <span class="route-sep">·</span>
         <span class="route-time">${timeStr}</span>
-        ${badgeHtml}
       </div>
     `;
 
     /* 이 구간의 실제 경로 지도에 반영 */
     if (result?.path?.length > 1) {
-      updatePolylineSegment(idx, result.path, effectiveCfg.color, effectiveMode);
+      updatePolylineSegment(idx, result.path, cfg.color, 'car');
     }
   }
 
@@ -572,17 +513,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* 구간별 실제 도로 경로 폴리라인 그리기 */
   async function drawRouteSegment(idx, from, to) {
-    let effectiveMode = currentTransport;
-    if (currentTransport === 'transit') {
-      effectiveMode = recommendTransport(from.coords, to.coords);
-    }
-    const apiMode = effectiveMode === 'walk' ? 'WALKING' : 'CAR';
+    const apiMode = 'CAR';
 
     const result = await fetchRoute(from.coords, to.coords, apiMode);
     if (!result || !kakaoMap) return;
 
-    const effectiveCfg = TRANSPORT_CONFIG[effectiveMode] || TRANSPORT_CONFIG[currentTransport];
-    updatePolylineSegment(idx, result.path, effectiveCfg.color, effectiveMode);
+    const cfg = TRANSPORT_CONFIG[currentTransport];
+    updatePolylineSegment(idx, result.path, cfg.color, 'car');
   }
 
   /* 폴리라인 업데이트 (기존 해당 구간 제거 후 신규 추가) */
@@ -595,14 +532,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const kakaoPath  = path.map(([lat, lng]) => new kakao.maps.LatLng(lat, lng));
-    const strokeStyle = mode === 'walk' ? 'dot' : 'solid';
 
     const polyline = new kakao.maps.Polyline({
       path:         kakaoPath,
       strokeWeight: 5,
       strokeColor:  color,
       strokeOpacity: 0.9,
-      strokeStyle,
+      strokeStyle: 'solid',
     });
     polyline.setMap(kakaoMap);
     mapPolylines[idx] = polyline;
@@ -703,61 +639,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-
-  /* =====================================================
-     패널 닫기 버튼
-     ===================================================== */
-  document.getElementById('close-course-panel').addEventListener('click', () => {
-    closeCoursePanel();
-    selectedCoursePlaces = [];
-    document.querySelectorAll('.recommend-tags .tag').forEach(t => t.classList.remove('tag-active'));
-    mapPolylines.forEach(p => p?.setMap(null));
-    mapOverlays.forEach(o => o?.setMap(null));
-    mapPolylines = [];
-    mapOverlays  = [];
-  });
-
-}); // DOMContentLoaded 끝
-
-/* =====================================================
-   로그인 / 회원 인증
-   ===================================================== */
-const loginBtn     = document.getElementById('login-btn');
-const signupBtn    = document.getElementById('signup-btn');
-const logoutBtn    = document.getElementById('logout-btn');
-const mypageBtn    = document.getElementById('mypage-btn');
-const heroLoginBtn = document.getElementById('hero-login-btn');
-const heroSignupBtn = document.getElementById('hero-signup-btn');
-
-const loginState = localStorage.getItem('isLogin');
-const loginUser  = localStorage.getItem('loginUser');
-
-if (loginState === 'true') {
-  if (loginBtn)  loginBtn.innerText          = `${loginUser}님`;
-  if (signupBtn) signupBtn.style.display     = 'none';
-  if (logoutBtn) logoutBtn.style.display     = 'inline-block';
-}
-
-function moveLogin()  { window.location.href = '../login/login.html'; }
-function moveSignup() { window.location.href = '../login/signup.html'; }
-
-loginBtn?.addEventListener('click', moveLogin);
-signupBtn?.addEventListener('click', moveSignup);
-heroLoginBtn?.addEventListener('click', moveLogin);
-heroSignupBtn?.addEventListener('click', moveSignup);
-
-mypageBtn?.addEventListener('click', () => {
-  if (localStorage.getItem('isLogin') !== 'true') {
-    alert('로그인이 필요합니다.');
-    window.location.href = '../login/login.html';
-    return;
-  }
-  window.location.href = '../mypage/mypage.html';
-});
-
-logoutBtn?.addEventListener('click', () => {
-  localStorage.removeItem('isLogin');
-  localStorage.removeItem('loginUser');
-  alert('로그아웃 되었습니다.');
-  location.reload();
 });
