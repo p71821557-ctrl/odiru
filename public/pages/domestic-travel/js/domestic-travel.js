@@ -640,3 +640,63 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+const loginBtn = document.getElementById("login-btn");
+const signupBtn = document.getElementById("signup-btn");
+const logoutBtn = document.getElementById("logout-btn");
+const mypageBtn = document.getElementById("mypage-btn");
+const heroLoginBtn = document.getElementById("hero-login-btn");
+const heroSignupBtn = document.getElementById("hero-signup-btn");
+
+async function checkLoginStatus() {
+  try {
+    const response = await fetch("/api/user");
+    const user = await response.json();
+
+    if (user) {
+      if (loginBtn) {
+        loginBtn.innerText = `${user.nickname}님`;
+        loginBtn.onclick = () => { window.location.href = "/pages/mypage/mypage.html"; };
+      }
+      if (signupBtn) signupBtn.style.display = "none";
+      if (logoutBtn) logoutBtn.style.display = "inline-block";
+
+      localStorage.setItem("isLogin", "true");
+      localStorage.setItem("loginUser", user.nickname);
+    } else {
+      localStorage.setItem("isLogin", "false");
+      localStorage.removeItem("loginUser");
+
+      const moveToLogin = () => {
+        window.location.href = "/pages/login/login.html";
+      };
+      if (loginBtn) loginBtn.onclick = moveToLogin;
+      if (heroLoginBtn) heroLoginBtn.onclick = moveToLogin;
+    }
+  } catch (err) {
+    console.error("로그인 상태 확인 실패:", err);
+  }
+}
+
+checkLoginStatus();
+
+const moveSignup = () => {
+  window.location.href = "/pages/login/signup.html";
+};
+signupBtn?.addEventListener("click", moveSignup);
+heroSignupBtn?.addEventListener("click", moveSignup);
+
+mypageBtn?.addEventListener("click", () => {
+  if (localStorage.getItem("isLogin") !== "true") {
+    alert("로그인이 필요합니다.");
+    window.location.href = "/pages/login/login.html";
+    return;
+  }
+  window.location.href = "/pages/mypage/mypage.html";
+});
+
+logoutBtn?.addEventListener("click", async () => {
+  localStorage.removeItem("isLogin");
+  localStorage.removeItem("loginUser");
+  alert("로그아웃 되었습니다.");
+  window.location.href = "/logout";
+});
